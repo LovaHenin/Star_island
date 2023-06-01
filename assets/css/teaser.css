@@ -1,0 +1,76 @@
+@font-face {
+    font-family: 'Iceland';
+    src: url("../font/Iceland-Regular.ttf") format('truetype');
+}* 
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+.container {
+
+    display: flex;
+}
+
+body {
+    background: rgb(29, 23, 23);
+}
+
+.image img {
+    width: 120%;
+}
+
+html {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 15vh;
+    height: 100%;
+}
+
+#timer {
+    position: absolute;
+    top: 40vh;
+    left: 55vh;
+    font-weight: bold;
+    font-size: 5em;
+    color: aliceblue;
+    font-family: 'Iceland', cursive;
+}
+
+.reseaux {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    margin-left: 40%;
+    bottom: 5%;
+    transition: 30ms;
+}
+
+.droite,
+.gauche {
+    width: 10%;
+    opacity: 0;
+    transition: opacity 0.5s 0.2s;
+}
+
+.centre {
+    width: 30%;
+}
+
+.reseaux:hover .droite,
+.reseaux:hover .gauche {
+    opacity: 1;
+}
+
+/* .reseaux:has(.centre:hover) .droite
+{
+    opacity: 1;
+}
+.reseaux:has(.centre:hover) .gauche
+{
+    opacity: 1;
+} 

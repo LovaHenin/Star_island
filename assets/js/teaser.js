@@ -1,7 +1,7 @@
 var Affiche=document.getElementById("timer");
  function Rebour() {
  var date1 = new Date();
- var date2 = new Date ("Jun 25, 2023 00:00:00");
+ var date2 = new Date ("Jun 31, 2023 00:00:00");
  var sec = (date2 - date1) / 1000;
  var n = 24 * 3600;
  if (sec > 0) {

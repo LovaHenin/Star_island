@@ -1,76 +1,87 @@
 @font-face {
     font-family: 'Iceland';
-    src: url("../font/Iceland-Regular.ttf") format('truetype');
-}* 
-{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-
-}
-
-.container {
-
-    display: flex;
+    src: url('../font/Iceland-Regular.ttf') format('truetype');
 }
 
 body {
-    background: rgb(29, 23, 23);
+    background-color: black;
 }
 
-.image img {
-    width: 120%;
+main {
+    height: 100vh;
+    background-image: url('../img/Perso1-removebg-preview.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left 30% top;
 }
 
-html {
-    display: flex;
-    flex: 1;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 15vh;
-    height: 100%;
-}
-
-#timer {
-    position: absolute;
-    top: 40vh;
-    left: 55vh;
-    font-weight: bold;
-    font-size: 5em;
-    color: aliceblue;
+label {
     font-family: 'Iceland', cursive;
+    font-size: 4em;
+    color: #000000;
+    text-shadow: 2px 2px 0 #000000, 4px 4px 0 #000000;
 }
 
-.reseaux {
+.reseaux-sociaux {
+    position: absolute;
+    bottom: 70px;
+}
+
+
+.reseaux-sociaux  a {
     display: flex;
     position: absolute;
-    align-items: center;
-    margin-left: 40%;
-    bottom: 5%;
-    transition: 30ms;
-}
-
-.droite,
-.gauche {
-    width: 10%;
+    transition: ease-in-out .9s;
+    width: 3em;
+    height: 3em;
     opacity: 0;
-    transition: opacity 0.5s 0.2s;
+    justify-content: center;
+    align-items: center;
 }
 
-.centre {
-    width: 30%;
+.reseaux-sociaux  a.reseaux img {
+    width: 1.5em;
+    height: 1.5em;
+    object-fit: cover;
 }
 
-.reseaux:hover .droite,
-.reseaux:hover .gauche {
+#discorde {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    opacity: 1;
+
+}
+
+#discorde img {
+    width: 3em;
+    height: 2.3em;
+    object-fit: cover;
+}
+
+.reseaux-sociaux:hover #facebook {
+    transform: translateX(3em);
     opacity: 1;
 }
 
-/* .reseaux:has(.centre:hover) .droite
-{
+.reseaux-sociaux:hover #tiktok {
+    transform: translateX(5.5em);
+    transition: ease-in-out .9s;
     opacity: 1;
 }
-.reseaux:has(.centre:hover) .gauche
-{
+
+.reseaux-sociaux:hover #twitter {
+    transform: translateX(-3em);
+    transition: ease-in-out .9s;
     opacity: 1;
-} 
+}
+
+.reseaux-sociaux:hover #youtube {
+    transform: translateX(-5.5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+
+}

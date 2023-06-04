@@ -5,30 +5,76 @@
 
 body {
     background-color: black;
+
+}
+
+.container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container p {
+    padding: 1rem;
+    text-align: center;
+
+}
+
+.titre {
+    color: wheat;
+
+}
+
+.container img {
+
+    width: 30%;
+
+
 }
 
 main {
-    height: 100vh;
-    background-image: url('../img/Perso1-removebg-preview.png');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-image: url('../img/predation.png');
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: left 30% top;
+    background-size: 100%;
+    margin-bottom: 40%;
+    background-position: 0 70%;
+}
+
+
+.affiche {
+    margin-top: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 label {
     font-family: 'Iceland', cursive;
-    font-size: 4em;
+    font-size: 3em;
+    z-index: 100;
     color: #000000;
-    text-shadow: 2px 2px 0 #000000, 4px 4px 0 #000000;
+    text-shadow: 2px 2px 0 #4d4545, 4px 4px 0 #593f3f;
 }
 
 .reseaux-sociaux {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     bottom: 70px;
 }
 
 
-.reseaux-sociaux  a {
+.reseaux-sociaux a {
     display: flex;
     position: absolute;
     transition: ease-in-out .9s;
@@ -39,7 +85,7 @@ label {
     align-items: center;
 }
 
-.reseaux-sociaux  a.reseaux img {
+.reseaux-sociaux a.reseaux img {
     width: 1.5em;
     height: 1.5em;
     object-fit: cover;
@@ -62,26 +108,179 @@ label {
     object-fit: cover;
 }
 
-.reseaux-sociaux:hover #facebook {
+.reseaux-sociaux #facebook {
     transform: translateX(3em);
     opacity: 1;
 }
 
-.reseaux-sociaux:hover #tiktok {
+.reseaux-sociaux #instagramme {
+    transform: translateX(7.5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+
+}
+
+.reseaux-sociaux #tiktok {
     transform: translateX(5.5em);
     transition: ease-in-out .9s;
     opacity: 1;
 }
 
-.reseaux-sociaux:hover #twitter {
+.reseaux-sociaux #twitter {
     transform: translateX(-3em);
     transition: ease-in-out .9s;
     opacity: 1;
 }
 
-.reseaux-sociaux:hover #youtube {
+.reseaux-sociaux #youtube {
     transform: translateX(-5.5em);
     transition: ease-in-out .9s;
     opacity: 1;
 
 }
+
+.reseaux-sociaux #twitch {
+    transform: translateX(-7.5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+
+}
+
+.gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 80%);
+}
+
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    label {
+
+        font-size: 4em;
+    }
+    .container{
+        display: flex;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .container {
+      
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container img {
+        position: relative;
+        left: -40%;
+        top: -30%;
+    }
+
+    .container p {
+        position: relative;
+        left: -65%;
+        font-family: 'Iceland', cursive;
+        font-size: 1.5em;
+    }
+
+    .affiche {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10%;
+    }
+
+    main {
+        position: relative;
+        background-size: 50%;
+        height: 100vh;
+        background-position: 90% 0;
+    }
+
+    .reseaux-sociaux #facebook {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    .reseaux-sociaux #instagramme {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    .reseaux-sociaux #twitter {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    .reseaux-sociaux #youtube {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    .reseaux-sociaux #twitch {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    .reseaux-sociaux #tiktok {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    .reseaux-sociaux:hover #facebook {
+        transform: translateX(3em);
+        opacity: 1;
+    }
+
+    .reseaux-sociaux:hover #instagramme {
+        transform: translateX(7.5em);
+        transition: ease-in-out .9s;
+        opacity: 1;
+
+    }
+
+    .reseaux-sociaux:hover #tiktok {
+        transform: translateX(5.5em);
+        transition: ease-in-out .9s;
+        opacity: 1;
+    }
+
+    .reseaux-sociaux:hover #twitter {
+        transform: translateX(-3em);
+        transition: ease-in-out .9s;
+        opacity: 1;
+    }
+
+    .reseaux-sociaux:hover #youtube {
+        transform: translateX(-5.5em);
+        transition: ease-in-out .9s;
+        opacity: 1;
+
+    }
+
+    .reseaux-sociaux:hover #twitch {
+        transform: translateX(-7.5em);
+        transition: ease-in-out .9s;
+        opacity: 1;
+
+    }
+
+    /* // Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) {}
+             .container p {
+        position: relative;
+        left: -65%;
+        font-family: 'Iceland', cursive;
+        font-size: 1.5em;
+    }
+    /* // X-Large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {}
+
+    /* // XX-Large devices (larger desktops, 1400px and up) */
+    @media (min-width: 1400px) {}

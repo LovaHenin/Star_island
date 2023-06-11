@@ -253,7 +253,7 @@ label {
 }
 
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 800px) {
+@media only screen and (min-width: 800px) {
 
     .container {
 
@@ -274,7 +274,7 @@ label {
 
     .titre {
         position: relative;
-        left: 55vw;
+        left: 45vw;
     }
 
     .container p {
@@ -377,19 +377,20 @@ label {
     }
 
     .container img {
-        left: -30vw;
+        position: relative;
+        left: -40vw;
         width: 20%;
 
     }
-
     .titre {
+        position: relative;
         color: red;
         font-size: 110%;
+        left: 50vw;
     }
 }
-
 /* // X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
 
 .titre {
     color: red;
@@ -397,9 +398,10 @@ label {
     left: 40vw;
 }
 .container img {
-
+  
     width: 20%;
 
+}
 }
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
@@ -407,7 +409,7 @@ label {
     .titre {
         color: red;
         font-size: 120%;
-        left: 38vw;
+        left: 48vw;
     }
 
 }

@@ -24,4 +24,39 @@ function Rebour() {
     }
     tRebour = setTimeout("Rebour();", 1000);
 }
+
+
+// function changerImage() {
+
+//     var imageEnCours = document.getElementById('reseaux-sociaux').getAttribute('data-image');
+  
+
+//     if(imageEnCours == 'discorde'){
+//     document.getElementById('discorde').style.opacity = 0;
+//     document.getElementById('instagramme').style.opacity = 1;
+//     document.getElementById('reseaux-sociaux').setAttribute('data-image', 'instagramme');
+//     }else if(imageEnCours == 'instagramme'){
+//         document.getElementById('instagramme').style.opacity = 0;
+//         document.getElementById('twitch').style.opacity = 1;
+//         document.getElementById('reseaux-sociaux').setAttribute('data-image', 'twitch');
+
+//     }else if(imageEnCours == 'twitch'){
+//         document.getElementById('twitch').style.opacity = 0;
+//         document.getElementById('youtube').style.opacity = 1;
+//         document.getElementById('reseaux-sociaux').setAttribute('data-image', 'youtube');
+
+//     }else{
+//         document.getElementById('youtube').style.opacity = 0;
+//         document.getElementById('discorde').style.opacity = 1;
+//         document.getElementById('reseaux-sociaux').setAttribute('data-image', 'discorde');
+
+//     }
+//    // console.log(imageEnCours);
+//     }
+
+// changerImage();    
+// setInterval(changerImage, 3000);
+    // setInterval() permet d'éxécuter une fonction fournie en premier argument selon un timer
+// fourni en deuxième argument (en milliseconde)
+
 Rebour();

@@ -6,6 +6,7 @@
 body {
     background-image: url('../img/predation.png');
     background-repeat: no-repeat;
+    background-size: cover;
 
 }
 
@@ -23,7 +24,7 @@ body {
 
 }
 
-.titre {
+.titre .text-white {
     color: rgb(241, 241, 234);
 
 }
@@ -154,7 +155,7 @@ label {
 @media only screen and (max-width: 400px) {
 
     label {
-        font-size: 4em;
+        font-size: 200em;
     }
 
     .container {
@@ -173,20 +174,9 @@ label {
 
     .affiche {
         position: relative;
-        bottom: 10vh;
-    }
-
-    .gradient {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 80%);
-        height: 120%;
-    }
-
-    .reseaux-sociaux {
-
-        bottom: 3vh;
+        bottom: 40vh;
     }
 }
-
 @media only screen and (min-width: 400px) and (max-width: 600px) {
 
     label {

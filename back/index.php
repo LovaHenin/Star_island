@@ -1,5 +1,5 @@
 <?php     require_once '../config/function.php';
-require_once '../inc/backheader.inc.php';  ?>
+require_once '../inc/backheader.inc.php'; ?>
 
 
 

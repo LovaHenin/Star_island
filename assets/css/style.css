@@ -1,0 +1,63 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Iceland";
+  src: url("../font/Iceland-Regular.ttf") format("truetype");
+}
+/* marge droite par rapport à logo*/
+.navbar-brand {
+  margin-right: 15rem;
+}
+
+.cc-navbar {
+  background-color: rgba(0, 0, 0, 0.55);
+  font-family: "Iceland";
+  font-size: 1.5rem;
+  /*rajouter une ligne blanche sur le bas de nav*/
+  box-shadow: 1px 1px rgba(255, 255, 255, 0.54);
+  /* pour mettre la nav au dessus au moment du scrol*/
+  z-index: 99;
+}
+
+/* effet sur les menu*/
+.cc-navbar .nav-link {
+  /* Ajout ligne en dessous mais transparent jusqu'à hover*/
+  border-bottom: 1px solid transparent;
+  transition: padding-bottom 0.4s ease-in-out, border-color 0.3s ease;
+}
+
+.cc-navbar .nav-link:hover {
+  padding-bottom: 15px;
+  /* border bottom devient vert*/
+  border-bottom-color: var(--bs-teal);
+}
+
+.img-home {
+  width: 130%;
+}
+
+.logo {
+  position: absolute;
+  width: 12%;
+  top: 10%;
+  left: 0.2%;
+}
+
+.btn-order {
+  /*bs-teal couleur native bootstrap*/
+  color: var(--bs-teal);
+  border-color: var(--bs-teal);
+  transition: 0.5s;
+}
+
+.banner {
+  /* position: absolute; */
+  /* fixer et centrer la photo */
+  background: url("../img/gta_decors 5.png") center center fixed no-repeat;
+  /* cover->la photo va prendre toute la place*/
+  background-size: cover;
+  /* h900 -> ajouter une hauter de 900px*/
+  height: 800px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */

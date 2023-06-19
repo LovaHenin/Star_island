@@ -70,9 +70,7 @@
     color: white;
     font-size: 1rem;
 }
-#carouselExampleCaptions{
-margin-top: 3%;
-}
+
 
 .btn-order {
 
@@ -89,7 +87,44 @@ margin-top: 3%;
     /* cover->la photo va prendre toute la place*/
     background-size: cover;
     /* h500 -> ajouter une hauter de 500px*/
-    height: 600px;
+    height: 800px;
     width: 100%;
     
 }
+.titre{
+    position:relative;
+    top:-30vh;
+}
+
+#carouselExampleCaptions{
+    margin-top: 3%;
+    }
+.avis{
+    position:relative;
+    top:-30vh;
+}
+.top img{
+    width:30%;
+    margin-right: 5%;
+}
+.top span{
+    color: orangered;
+    font-weight: bold;
+    font-size:2rem;
+}
+.top h1{
+    margin-left: 10px;
+}
+.top p{
+    color:black;
+    font-weight: bold;
+    font-size:2rem;
+   
+}
+.star{
+    margin-left:30%;
+    color: rgb(233, 231, 231);
+    font-weight: bold;
+    font-size: 2rem;
+}
+ 

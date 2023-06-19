@@ -7,13 +7,12 @@ require_once '../inc/header.inc.php';
 <section class="banner d-flex justify-content-center  align-items-center pt-5">
 
     <!-- ajouter marge y-->
-    <div class="container my-5 py-5">
+    <div class="container">
 
         <div class="row">
             <div class="col-md-12">
-                <!-- mettre chaque premiere lette en majuscule et la police à Iceland-->
 
-                <div class="container h-100 d-flex flex-column justify-content-evenly text-light pt-5">
+                <div class=" titre d-flex flex-column justify-content-evenly text-light pt-5">
                     <h1 class="text-white text-center Iceland py-3">BIENVENUE SUR <br>
                         STAR'ISLAND</h1>
                     <p class=>
@@ -37,61 +36,102 @@ require_once '../inc/header.inc.php';
 <section class="banner d-flex justify-content-center  align-items-center pt-5  py-5 border">
     <div class="row">
         <div class=" col-md-12">
-        <div class="text-center">
-                    <div class="card-body">
-                        <h1 class="card-title  text-white">BIENVENUE SUR <br>STAR ISLAND</h1>
-                        <!--mettre les col texte et image à 6et 6-->
-                        <!--ajouter une autre classe si necessaire-->
-                      
-                            <!--carousel slide w-50 mx-auto 50% et centré -->
+            <div class="text-center">
+                <div class="card-body">
+                    <h1 class="card-title  text-white">BIENVENUE SUR <br>STAR ISLAND</h1>
+                    <!--mettre les col texte et image à 6et 6-->
+                    <!--ajouter une autre classe si necessaire-->
 
-                            <div id="carouselExampleCaptions" class="carousel slide w-50 mx-auto">
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                                        aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                                        aria-label="Slide 3"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="../assets/img/gta_decors1.jpg" class="d-block w-100" alt="...">
+                    <!--carousel slide w-50 mx-auto 50% et centré -->
 
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../assets/img/teaser.jpg" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
+                    <div id="carouselExampleCaptions" class="carousel slide w-50 mx-auto">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../assets/img/gta_decors1.jpg" class="d-block w-100" alt="...">
 
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../assets/img/teaser.jpg" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
                             </div>
-                       
+                            <div class="carousel-item">
+                                <img src="../assets/img/teaser.jpg" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
 
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../assets/img/teaser.jpg" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
+
+
                 </div>
+            </div>
         </div>
     </div>
 </section>
 
+<section class="banner d-flex justify-content-center  align-items-center pt-5">
 
+    <!-- ajouter marge y-->
+    <div class="container my-5 py-5">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- mettre chaque premiere lette en majuscule et la police à Iceland-->
+
+                <div class=" titre d-flex flex-column justify-content-evenly text-light ">
+                    <h1 class="text-white text-center Iceland py-3">BIENVENUE SUR <br>
+                        STAR'ISLAND</h1>
+                </div>
+                <div class="d-flex flex-column justify-content-evenly text-light  border border-light ">
+                    <div class="d-flex  px-4">
+                        <div class="top d-flex">
+                            <span>T</span> 
+                            <img src="<?= BASE_PATH . 'assets/img/topserveur.png' ?>" alt="" class="ms-3">
+                            <span>P</span>
+
+                        </div>
+                        <div class="star">
+                            <p>Star Island</p>
+                            <p>
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-around mt-2">
+                        <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                        <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                        <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                        <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                        <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+                    </div>
+                    <form class="d-flex flex-column ">
+                                    <textarea id="message" name="message" rows="4" cols="50"></textarea>
+                                    <input type="submit" value="Publier">
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
 
 
 <?php require_once '../inc/footer.inc.php';          ?>

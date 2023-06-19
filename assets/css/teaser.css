@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+}
+
+
+
+body {
+    /*empêche le défilement sur les appareils mobiles*/
+
+    background-image: url('../img/predation2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /*overflow: hidden;*/
+}
+
+
+.entete {
+    position: relative;
+    top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.entete img {
+    width: 9rem;
+}
+
+#playButton {
+    background: transparent;
+    border: none;
+
+}
+
+#playButton img {
+    width: 2rem;
+}
+
+#pauseIcon {
+    display: none;
+}
+
+.entete p {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.titre {
+    color: rgb(241, 241, 234);
+    text-align: center;
+}
+
+.affiche {
+    position: relative;
+    top: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+label {
+    font-family: 'Iceland', cursive;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+
+}
+
+
+
+.reseauSociaux {
+    position: relative;
+    top: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    bottom: 2vh;
+}
+
+#reseaux-sociaux img {
+    position: absolute;
+    bottom: -10vh;
+    left: 45vw;
+    transition: all 2s;
+}
+
+.box {
+    display: flex;
+}
+
+#checkbox {
+    width: 3.125rem;
+    height: 3.125rem;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+#checkbox:hover,
+.menu .menuItems:hover {
+    background: transparent;
+}
+
+#checkbox::before {
+    /* code dans checkbox et fontawesone*/
+    content: url('../img/icons8-discorde.png');
+    font-family: 'fontawesone 5 free';
+    font-weight: 700;
+    font-size: 1.5rem;
+    position: absolute;
+    background: transparent;
+    /*centré*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(41, 41, 41);
+    transition: all 1.5s;
+}
+
+#checkbox:checked::before {
+    content: url('../img/fermer.png');
+    background: transparent;
+
+}
+
+/*afficher menu*/
+.menu {
+    width: 0;
+    overflow: hidden;
+    display: flex;
+    transition: all .5s;
+}
+
+.menu .menuItems {
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    /*border-left: 1px solid rgb(165, 165, 165);*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*~ le menu va afficher*/
+#checkbox:checked~.menu {
+    width: 306px;
+    /* 6*50 +6*1 bordure*/
+}
+
+.menu .menuItems i {
+    font-size: 1.8rem;
+}
+
+.fa-whatsapp {
+    color: #25d366;
+}
+
+.fa-instagram {
+    color: #c32aa3;
+}
+
+.fa-facebook {
+    color: #4e869d;
+}
+
+.fa-twitter {
+    color: #1da1f2;
+}
+
+.fa-discord {
+    color: #cb4cd4;
+}
+
+/* Styles spécifiques aux appareils de taille supérieure */
+@media (min-width: 768px) {
+    body {
+        overflow: auto;
+    }
+
+    .entete p {
+        padding: 2rem;
+
+        font-size: 1.5rem;
+    }
+
+    label {
+
+        font-size: 3em;
+
+
+    }
+}

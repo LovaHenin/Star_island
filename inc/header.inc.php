@@ -71,7 +71,7 @@
                     <?php if (connect()) :           ?>
                         <a href="<?= BASE_PATH . '?a=dis'; ?>" class="btn  btn-primary">Déconnexion</a>
                     <?php else :           ?>
-                        <a href="<?= BASE_PATH . 'security/login.php'; ?>" class="btn me-5 btn-primary">Connexion</a>
+                        <a href="<?= BASE_PATH . 'security/login.php'; ?>" class="btn me-2 btn-primary">Connexion</a>
                         <a href="<?= BASE_PATH . 'security/register.php'; ?>" class="btn  btn-success">Inscription</a>
                     <?php endif;        ?>
 

@@ -60,13 +60,14 @@
 
 .tuto img,
 .event img {
-    margin-right:10%;
+    margin-right: 10%;
     width: 1.5rem;
     height: 1.5rem;
     ;
 }
+
 .tuto p,
-.event p{
+.event p {
     color: white;
     font-size: 1rem;
 }
@@ -79,52 +80,231 @@
     border-color: var(--bs-teal);
     transition: 0.5s;
 }
-
+/*les fonds des sections*/
 .banner {
-    /* position: absolute; */
+    position: absolute;
+    top: 0;
+    left: 0;
     /* fixer et centrer la photo */
     background: url('../img/gta_decors1.jpg') center center fixed no-repeat;
     /* cover->la photo va prendre toute la place*/
     background-size: cover;
     /* h500 -> ajouter une hauter de 500px*/
-    height: 800px;
+    height: 700px;
     width: 100%;
-    
-}
-.titre{
-    position:relative;
-    top:-30vh;
+
 }
 
-#carouselExampleCaptions{
-    margin-top: 3%;
-    }
-.avis{
-    position:relative;
-    top:-30vh;
+.bottom{
+
+    margin-top: 700px;
 }
-.top img{
-    width:30%;
+
+
+.titre {
+    position: relative;
+    top: -20vh;
+}
+
+#carouselExampleCaptions {
+    margin-top: 3%;
+}
+
+.avis {
+    position: relative;
+    top: -30vh;
+}
+
+.top img {
+    width: 30%;
     margin-right: 5%;
 }
-.top span{
+
+.top span {
     color: orangered;
     font-weight: bold;
-    font-size:2rem;
+    font-size: 2rem;
 }
-.top h1{
+
+.top h1 {
     margin-left: 10px;
 }
-.top p{
-    color:black;
+
+.top p {
+    color: black;
     font-weight: bold;
-    font-size:2rem;
-   
+    font-size: 2rem;
+
 }
-.star{
-    margin-left:30%;
+
+.star {
+    margin-left: 30%;
     color: rgb(233, 231, 231);
     font-weight: bold;
     font-size: 2rem;
 }
- 
+
+.message,
+.comment {
+    border-radius: 0.9rem;
+}
+
+.etoile img {
+    margin-right: 1rem;
+}
+
+#section2,
+#section3 {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#section1 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#rond1 {
+    color: white;
+}
+
+#rond2,
+#rond3 {
+    color: red;
+}
+
+.navigation {
+    position: absolute;
+    top: 600px;
+    left: 0;
+    width: 100%;
+
+}
+
+/* bouton discord*/
+
+.reseaux-sociaux {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 650px;
+    left: 50%;
+    bottom: 9vh;
+}
+
+
+.reseaux-sociaux a {
+    display: flex;
+    position: absolute;
+    transition: ease-in-out .9s;
+    width: 3em;
+    height: 3em;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.reseaux-sociaux a.reseaux img {
+    width: 1.5em;
+    height: 1.5em;
+    object-fit: cover;
+}
+
+#discorde {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    opacity: 1;
+
+}
+/* positionner les icones derrière discorde*/
+#discorde img {
+    width: 3em;
+    height: 2.3em;
+    object-fit: cover;
+}
+
+.reseaux-sociaux #facebook {
+    transform: translateX(0);
+    opacity: 0;
+    transition: ease-in-out .9s;
+}
+
+.reseaux-sociaux #instagramme {
+    transform: translateX(0);
+    opacity: 0;
+
+    transition: ease-in-out .9s;
+}
+
+
+.reseaux-sociaux #tiktok {
+    transform: translateX(0);
+    opacity: 0;
+    transition: ease-in-out .9s
+}
+
+.reseaux-sociaux #twitter {
+    transform: translateX(0);
+    opacity: 0;
+    transition: ease-in-out .9s;
+
+}
+
+.reseaux-sociaux #youtube {
+    transform: translateX(0);
+    opacity: 0;
+    transition: ease-in-out .9s
+
+}
+
+.reseaux-sociaux #twitch {
+    transform: translateX(0);
+    opacity: 0;
+    transition: ease-in-out .9s
+
+}
+
+/*hover*/
+
+.reseaux-sociaux:hover #facebook {
+    transform: translateX(3em);
+    opacity: 1;
+}
+
+.reseaux-sociaux:hover #instagramme {
+    transform: translateX(7.5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+
+}
+
+.reseaux-sociaux:hover #tiktok {
+    transform: translateX(5.5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.reseaux-sociaux:hover #twitter {
+    transform: translateX(-3em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.reseaux-sociaux:hover #youtube {
+    transform: translateX(-5.5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+
+}
+
+.reseaux-sociaux:hover #twitch {
+    transform: translateX(-7.5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+
+}

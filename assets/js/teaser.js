@@ -1,4 +1,7 @@
-  //var Affiche = document.getElementById("compte");
+
+
+
+/*variables compte à rebour*/ 
   var jour = document.getElementById("jour");
   var heure = document.getElementById("heure");
   var min = document.getElementById("min");
@@ -43,6 +46,9 @@
           pauseIcon.style.display = "none";
       }
   }
+
+
+
 
 // function changerImage() {
 

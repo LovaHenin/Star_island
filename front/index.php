@@ -170,14 +170,127 @@ require_once '../inc/header.inc.php';
             </div>
         </div>
     </div>
-    <div class="row bottom">
-    <div class="col-6 border">
-      <h1>Contenu de la première colonne</h1>
-    </div>
-    <div class="col-6 border">
-    <h1>Contenu de la première colonne</h1>
-    </div>
-  </div>
+
+    <section class="row avis d-flex flex-column align-items-center">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 col-md-6 d-flex justify-content-center ">
+                    <div class="bloc d-flex  border border-light">
+                        <div class="p-2">
+                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class="img-fluid">
+                        </div>
+
+                        <div class="ps-2">
+                            <div class="d-flex justify-content-around  mt-2">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+                            </div>
+                            <div class="mt-2 text-black">
+                                Super serveur GTA RP <br>
+                                Publié le 20/06/2023
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 d-flex justify-content-center">
+                    <div class="d-flex border border-light">
+                        <div class="p-2">
+                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
+                        </div>
+                        <div class="ps-2">
+                            <div class="d-flex justify-content-around  mt-2">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+                            </div>
+                            <div class="mt-2 text-black">
+                                Super serveur GTA RP <br>
+                                Publié le 20/06/2023
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mb-5">
+                <div class="col-12 col-md-6 d-flex justify-content-center ">
+                    <div class="bloc d-flex  border border-light">
+                        <div class="p-2">
+                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class="img-fluid">
+                        </div>
+
+                        <div class="ps-2">
+                            <div class="d-flex justify-content-around  mt-2">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+                            </div>
+                            <div class="mt-2 text-black">
+                                Super serveur GTA RP <br>
+                                Publié le 20/06/2023
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 d-flex justify-content-center">
+                    <div class="d-flex border border-light">
+                        <div class="p-2">
+                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
+                        </div>
+                        <div class="ps-2">
+                            <div class="d-flex justify-content-around  mt-2">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+                            </div>
+                            <div class="mt-2 text-black">
+                                Super serveur GTA RP <br>
+                                Publié le 20/06/2023
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </section>
+        <section class="avis1 d-flex flex-column align-items-center">
+        <div class="comment d-row  flex flex-column justify-content-center text-light  border border-light w-75">
+
+            <div class="star">
+                <p>VOTRE AVIS NOUS INTERESSE</p>
+                <p>
+            </div>
+
+            <div class="etoile d-flex justify-content-center my-2  mt-2">
+                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+            </div>
+            <form class="d-flex flex-column ">
+                <textarea class="message w-50 mx-auto" id="message" name="message" value="Votre commentaire" rows="4" cols="50"></textarea>
+                <input class="w-20 my-2 mx-auto" type="submit" value="Publier">
+            </form>
+        </div>
+    </section>
+
 </div>
 
-<?php require_once '../inc/footer.inc.php';          ?>
+
+
+
+<?php require_once '../inc/footer.inc.php'; ?>

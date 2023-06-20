@@ -95,9 +95,21 @@
 
 }
 
-.bottom{
+.avis{
 
-    margin-top: 700px;
+    margin-top: 910px;
+    background: url('../img/gta_decors1.jpg') center center fixed no-repeat;
+    /* cover->la photo va prendre toute la place*/
+    background-size: cover;
+  
+}
+.avis1{
+
+    margin-top: 10px;
+    background: url('../img/gta_decors1.jpg') center center fixed no-repeat;
+    /* cover->la photo va prendre toute la place*/
+    background-size: cover;
+  
 }
 
 
@@ -267,6 +279,12 @@
     opacity: 0;
     transition: ease-in-out .9s
 
+}
+.affiche{
+    width:15px;
+}
+.bloc{
+    width: 300px;
 }
 
 /*hover*/

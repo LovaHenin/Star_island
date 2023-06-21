@@ -9,8 +9,7 @@ const button3 = document.getElementById("rond3");
 
 button1.addEventListener("click", function () {
 
-
-    
+  
     section1.style.opacity = "1";
    
     button1.style.color = "white";
@@ -50,3 +49,4 @@ button3.addEventListener("click", function () {
         button2.style.color = "red";
     
 });
+

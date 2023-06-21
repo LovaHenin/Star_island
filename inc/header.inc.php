@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../assets/bootstrap/scss/_bootswatch.scss" > 
 
     <link rel="stylesheet" href="../assets/css/index.css">
+   
     <!-- pour le sass main.scss-> style.css-->
     <!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
 </head>
@@ -30,19 +31,19 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_PATH; ?>">
-                                <img src="../assets/img/icons8-home.png" class="img-home" alt="...">
+                            <a class="nav-link" href="<?= BASE_PATH.'front/'; ?>">
+                                <img src="../assets/img/icons8-home.png" class="img-home" alt="logo">
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                            <a class="nav-link active"" href=" #">Features</a>
+                            <a class="nav-link active" href="<?=  BASE_PATH.'front/galerie.php'; ?>">Galerie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="<?=  BASE_PATH.'front/vip.php'; ?>">DEVENIR VIP</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#">SERVEUR</a>
                 </li>
                         <?php if (admin()) :           ?>
                 <li class="nav-item dropdown">

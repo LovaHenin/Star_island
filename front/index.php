@@ -8,7 +8,6 @@ require_once '../inc/header.inc.php';
     <div class="row">
 
 
-
         <section id="section1" class="banner d-flex justify-content-center  align-items-center pt-5">
 
             <!-- ajouter marge y-->
@@ -38,7 +37,7 @@ require_once '../inc/header.inc.php';
 
         </section>
 
-        <section id="section2" class="banner d-flex justify-content-center  align-items-center pt-5  py-5 border">
+        <section id="section2" class="banner d-flex justify-content-center  align-items-center pt-5  py-5 ">
             <div class="row">
                 <div class=" col-12">
                     <div class="text-center">
@@ -175,7 +174,7 @@ require_once '../inc/header.inc.php';
         <div class="container">
             <div class="row mb-5">
                 <div class="col-12 col-md-6 d-flex justify-content-center ">
-                    <div class="bloc d-flex  border border-light">
+                    <div class="rep1 bloc d-flex  border border-light">
                         <div class="p-2">
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class="img-fluid">
                         </div>
@@ -196,7 +195,7 @@ require_once '../inc/header.inc.php';
                     </div>
                 </div>
                 <div class="col-12 col-md-6 d-flex justify-content-center">
-                    <div class="d-flex border border-light">
+                    <div id="rep2" class="rep d-flex border border-light mt">
                         <div class="p-2">
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
                         </div>
@@ -219,7 +218,7 @@ require_once '../inc/header.inc.php';
             </div>
             <div class="row mb-5">
                 <div class="col-12 col-md-6 d-flex justify-content-center ">
-                    <div class="bloc d-flex  border border-light">
+                    <div id="rep3"  class="rep1 bloc d-flex  border border-light">
                         <div class="p-2">
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class="img-fluid">
                         </div>
@@ -240,7 +239,7 @@ require_once '../inc/header.inc.php';
                     </div>
                 </div>
                 <div class="col-12 col-md-6 d-flex justify-content-center">
-                    <div class="d-flex border border-light">
+                    <div id="rep4"  class="rep d-flex border border-light">
                         <div class="p-2">
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
                         </div>
@@ -261,30 +260,30 @@ require_once '../inc/header.inc.php';
                 </div>
 
             </div>
+            <div class="row mb-5">
+                <div class="col-12 d-flex justify-content-center mt-5">
+                    <div class="comment d-row  flex flex-column justify-content-center text-light  border border-light w-75">
 
+                        <div class="star">
+                            <p>VOTRE AVIS NOUS INTERESSE</p>
+                            <p>
+                        </div>
 
+                        <div class="etoile d-flex justify-content-center my-2  mt-2">
+                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
+                            <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+                        </div>
+                        <form class="d-flex flex-column ">
+                            <textarea class="message w-50 mx-auto" id="message" name="message" value="Votre commentaire" rows="4" cols="50"></textarea>
+                            <input class="w-20 my-2 mx-auto" type="submit" value="Publier">
+                        </form>
+                    </div>
 
-        </div>
-    </section>
-        <section class="avis1 d-flex flex-column align-items-center">
-        <div class="comment d-row  flex flex-column justify-content-center text-light  border border-light w-75">
-
-            <div class="star">
-                <p>VOTRE AVIS NOUS INTERESSE</p>
-                <p>
+                </div>
             </div>
-
-            <div class="etoile d-flex justify-content-center my-2  mt-2">
-                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
-            </div>
-            <form class="d-flex flex-column ">
-                <textarea class="message w-50 mx-auto" id="message" name="message" value="Votre commentaire" rows="4" cols="50"></textarea>
-                <input class="w-20 my-2 mx-auto" type="submit" value="Publier">
-            </form>
         </div>
     </section>
 

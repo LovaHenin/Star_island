@@ -4,7 +4,7 @@ require_once '../inc/header.inc.php';
 
 <!--pt-5 padding top 5-->
 <!-- mettre en flex puis centrer section avec une classe en plus banner-->
-<div class="">
+<div class="home">
     <div class="row">
 
 

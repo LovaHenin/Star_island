@@ -4,6 +4,7 @@
 }
 
 body {
+   
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,7 +13,9 @@ body {
     /* cover->la photo va prendre toute la place*/
     background-size: cover;
     /* Masque la barre de défilement horizontale */
+   
 }
+
 
 /* marge droite par rapport à logo*/
 .navbar-brand {
@@ -364,7 +367,6 @@ body {
 .titre-page {
     position: absolute;
     top: 13vh;
-
     left: 50%;
     transform: translateX(-50%);
 
@@ -518,7 +520,19 @@ input[type=radio]:checked {
     position: relative;
     right:0.9rem
 }
+/*VIP*/
 
+/* Equipe*/
+
+.equipeBloc {
+    width: 150px;
+    height: 50px;
+    border: 2px solid white;
+    margin-right: -2px;
+    box-shadow: 2px 0 0 white;
+    border-radius: 10px;
+  }
+/*Equipe*/
 /*--------footer-----------*/
 .footer {
     margin-top: auto;

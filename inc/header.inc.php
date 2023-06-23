@@ -42,7 +42,7 @@
                             <a class="nav-link" href="<?= BASE_PATH . 'front/vip.php'; ?>">DEVENIR VIP</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= BASE_PATH . 'front/equipe.php'; ?>">SERVEUR</a>
+                            <a class="nav-link" href="<?= BASE_PATH . 'front/equipe.php'; ?>">EQUIPE</a>
                         </li>
                         <?php if (admin()) :           ?>
                             <li class="nav-item dropdown">

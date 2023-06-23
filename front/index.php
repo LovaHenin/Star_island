@@ -46,6 +46,7 @@ require_once '../inc/header.inc.php';
                             <!--mettre les col texte et image à 6et 6-->
                             <!--ajouter une autre classe si necessaire-->
 
+                            
                             <!--carousel slide w-50 mx-auto 50% et centré -->
 
                             <div id="carouselExampleCaptions" class="carousel slide w-25 mx-auto">
@@ -170,6 +171,7 @@ require_once '../inc/header.inc.php';
         </div>
     </div>
 
+<!-- Section Avis-->
     <section class="row avis d-flex flex-column align-items-center">
         <div class="container">
             <div class="row mb-5">
@@ -290,6 +292,56 @@ require_once '../inc/header.inc.php';
 </div>
 
 
+<script>/* variables index rond*/
+const section1 = document.getElementById("section1");
+const button1 = document.getElementById("rond1");
+const section2 = document.getElementById("section2");
+const button2 = document.getElementById("rond2");
+const section3 = document.getElementById("section3");
+const button3 = document.getElementById("rond3");
 
+
+button1.addEventListener("click", function () {
+
+  
+    section1.style.opacity = "1";
+   
+    button1.style.color = "white";
+    section3.style.opacity = "0";
+    section2.style.opacity = "0";
+    button2.style.color = "red";
+    button3.style.color = "red";
+    
+
+});
+
+
+button2.addEventListener("click", function () {
+
+
+    
+    section2.style.opacity = "1";
+   
+    button2.style.color = "white";
+    section1.style.opacity = "0";
+    section3.style.opacity = "0";
+  
+    button1.style.color = "red";
+    button3.style.color = "red";
+
+});
+button3.addEventListener("click", function () {
+
+            section3.style.opacity = "1";
+       
+        button3.style.color = "white";
+        section1.style.opacity = "0";
+        section2.style.opacity = "0";
+        button1.style.color = "red";
+        button2.style.color = "red";
+    
+});
+
+</script>
 
 <?php require_once '../inc/footer.inc.php'; ?>

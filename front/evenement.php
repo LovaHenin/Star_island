@@ -3,7 +3,7 @@ require_once '../inc/header.inc.php';
 ?>
 
 <section class="evenement">
-    <div class="vip container">
+    <div class="titreCentre container">
         <div class="row">
             <div class="col-6 justify-content-start">
                 <img src="../assets/img/prisonds 1.png" alt="prison" class="img-fluid w-50">

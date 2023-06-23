@@ -4,10 +4,11 @@ require_once '../inc/header.inc.php';
 
 <div class="titre-page"><h1 class="text-light">DEVENIR VIP</h1></div>
 
-<div class="vip container">
+<div class="titreCentre container">
     <!--between semble ne marche pas sans container-->
     <div class="row mb-5 d-flex justify-content-between">
-        <div id="vipGauche" class="vipBordure col-12 col-md-4 d-flex  border-4 border-danger ">
+      <!-- Changer la couleur de la bordure-->
+        <div id="vipGauche" class="vipBordure col-12 col-md-4 d-flex  border-danger ">
          <img id="personnaGauche" src="../assets/img/Perso2-removebg-preview.png" alt="personnage">
         </div>
         <div class="sousvip col-12 col-md-4 d-flex flex-column align-items-center justify-content-center text-light">
@@ -18,7 +19,7 @@ require_once '../inc/header.inc.php';
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid iure non ea neque et exercitationem veritatis commodi accusamus sit id accusantium nam eveniet, laudantium numquam reprehenderit necessitatibus. Hic, eligendi perferendis!</p>
        
         </div>
-        <div id="vipDroite" class="vipBordure col-12 col-md-4 d-flex  border-4 border-danger ">
+        <div id="vipDroite" class="vipBordure col-12 col-md-4 d-flex   border-danger ">
         <img id="personnaDroite"src="../assets/img/Perso1-removebg-preview.png" alt="personnage">
         </div>
     </div>

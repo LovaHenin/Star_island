@@ -1,51 +1,170 @@
 <?php require_once '../config/function.php';
 require_once '../inc/header.inc.php';
 ?>
+<style>
+  .reseauSociaux {
+    position: relative;
+    /*top: 92vh; desktop*/
+    top: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    bottom: 2vh;
+  }
 
-<div class="titre-page"><h1 class="text-light">DEVENIR VIP</h1></div>
+  h2 {
+    color: orangered;
+    text-decoration: underline;
+  }
 
-<div class="titreCentre container">
-    <!--between semble ne marche pas sans container-->
-    <div class="row mb-5 d-flex justify-content-between">
-      <!-- Changer la couleur de la bordure-->
-        <div id="vipGauche" class="vipBordure col-12 col-md-4 d-flex  border-danger ">
-         <img id="personnaGauche" src="../assets/img/Perso2-removebg-preview.png" alt="personnage">
-        </div>
-        <div class="sousvip col-12 col-md-4 d-flex flex-column align-items-center justify-content-center text-light">
+  .image-container {
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+  }
 
-            <h2>VIP</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, modi itaque odit sint explicabo animi asperiores, eaque recusandae, suscipit ipsum dicta nulla pariatur quasi odio numquam impedit incidunt ad? Nostrum!</p>
-            <h2>VIP+</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid iure non ea neque et exercitationem veritatis commodi accusamus sit id accusantium nam eveniet, laudantium numquam reprehenderit necessitatibus. Hic, eligendi perferendis!</p>
-       
-        </div>
-        <div id="vipDroite" class="vipBordure col-12 col-md-4 d-flex   border-danger ">
-        <img id="personnaDroite"src="../assets/img/Perso1-removebg-preview.png" alt="personnage">
-        </div>
-    </div>
+  /*vip*/
+  @media (min-width: 768px) {
+    .logo {
+
+      width: 15%;
+    }
+
+    #vipG {
+      width: 80%;
+      top: 30vh;
+    }
+
+    .reseauSociaux {
+
+      top: 11vh;
+    }
+
+    .right {
+      margin-right: -4vw;
+    }
+
+    .footer .right img {
+      width: 30%;
+
+    }
+
+  }
+  @media (min-width: 1200px) {
+    .logo {
+
+      width: 10%;
+    }
+
+    #vipG {
+      width: 65%;
+      top: 10vh;
+    }
+
+    .img-home {
+            width: 130%;
+            margin-top: 0.5vh;
+        }
+    .reseauSociaux {
+
+      top: 15vh;
+    }
+
+    .right {
+      margin-right: -1vw;
+    }
+
+    .footer .right img {
+      width: 30%;
+
+    }
+
+  }
+</style>
+
+<div class="titre-page">
+  <!--text-truncate pour ajuster ou tronquer h1 pour ne pas passer à la ligne-->
+  <h1 class="text-light text-truncate">DEVENIR VIP</h1>
 </div>
-<div class="reseaux-sociaux">
-  <a id="facebook" class="reseaux facebook" href="">
-    <img src="../assets/img/icons8-facebook.png" alt="facebook">
-  </a>
-  <a id="tiktok" class="reseaux" href="">
-    <img src="../assets/img/Logo_tiktok.png" alt="tiktok">
-  </a>
-  <a id="twitter" class="reseaux" href="">
-    <img src="../assets/img/icons8-twitter.png" alt="twitter">
-  </a>
-  <a id="youtube" class="reseaux" href="">
-    <img src="../assets/img/icons8-youtube.png" alt="youtube">
-  </a>
-  <a id="twitch" class="reseaux" href="">
-    <img src="../assets/img/logo_twitch.png" alt="twitch">
-  </a>
-  <a id="instagramme" class="reseaux" href="">
-    <img src="../assets/img/logo_Instagram.png" alt="instagramme">
-  </a>
-  <a id="discorde" class="reseaux" href="">
-    <img src="../assets/img/icons8-discorde.png" alt="discorde">
-  </a>
+
+<div class="container" style="margin-top: 250px;">
+
+  <div class="row text-center justify-content-between">
+
+
+    <div class="col-12 col-md-4">
+      <img id="vipG" src="../assets/img/Group5M.png" alt="personnage" class="img-fluid">
+    </div>
+
+    <div class="col-12 col-md-4 text-light">
+      <h2>VIP</h2>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, modi itaque odit sint explicabo animi asperiores, eaque recusandae, suscipit ipsum dicta nulla pariatur quasi odio numquam impedit incidunt ad? Nostrum!</p>
+      <h2>VIP+</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid iure non ea neque et exercitationem veritatis commodi accusamus sit id accusantium nam eveniet, laudantium numquam reprehenderit necessitatibus. Hic, eligendi perferendis!</p>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <img id="vipD" src="../assets/img/Group 6.png" alt="personnage" class="img-fluid">
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="reseauSociaux">
+
+  <div class="box">
+    <input type="checkbox" id="checkbox">
+    <!--checkbox-->
+    <!--Menu-->
+    <div class="menu">
+      <a href="#">
+        <div class="menuItems">
+          <i class="fab fa-whatsapp"></i>
+
+        </div>
+
+      </a>
+      <a href="#">
+        <div class="menuItems">
+          <i class="fab fa-instagram"></i>
+
+        </div>
+
+      </a>
+
+      <a href="#">
+        <div class="menuItems">
+          <i class="fab fa-facebook"></i>
+
+        </div>
+
+      </a>
+      <a href="#">
+        <div class="menuItems">
+          <i class="fab fa-twitter"></i>
+
+        </div>
+
+      </a>
+      <a href="#">
+        <div class="menuItems">
+          <i class="fab fa-discord"></i>
+
+        </div>
+
+      </a>
+      <a href="#">
+        <div class="menuItems">
+          <i class="fab fa-linkedin"></i>
+
+        </div>
+
+      </a>
+    </div>
+  </div>
 </div>
 
 

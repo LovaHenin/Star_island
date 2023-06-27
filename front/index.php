@@ -2,13 +2,83 @@
 require_once '../inc/header.inc.php';
 ?>
 
+<style>
+    .bas {
+        position: relative;
+    }
+
+    .reseauSociaux {
+        position: relative;
+        /*top: 92vh; desktop*/
+        top: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 10vh;
+        bottom: 2vh;
+    }
+
+    /*index*/
+    @media (min-width: 768px) {
+        .logo {
+
+            width: 15%;
+        }
+
+
+
+        .reseauSociaux {
+
+            top: 58vh;
+        }
+
+        .right {
+            margin-right: -4vw;
+        }
+
+        .footer .right img {
+            width: 30%;
+
+        }
+
+    }
+
+    @media (min-width: 1200px) {
+        .logo {
+
+            width: 10%;
+        }
+
+
+
+        .img-home {
+            width: 130%;
+            margin-top: 0.5vh;
+        }
+
+        .reseauSociaux {
+
+            top: 68vh;
+        }
+
+        .right {
+            margin-right: -1vw;
+        }
+
+        .footer .right img {
+            width: 30%;
+
+        }
+
+    }
+</style>
+
 <!--pt-5 padding top 5-->
 <!-- mettre en flex puis centrer section avec une classe en plus banner-->
 <div class="home">
     <div class="row">
 
-
-        <section id="section1" class="banner d-flex justify-content-center  align-items-center pt-5">
+        <section id="section1" class=" titre-center banner d-flex justify-content-center  align-items-center ">
 
             <!-- ajouter marge y-->
             <div class="container">
@@ -16,7 +86,7 @@ require_once '../inc/header.inc.php';
                 <div class="row">
                     <div class="col-12">
 
-                        <div class=" titre d-flex flex-column justify-content-evenly text-light pt-5">
+                        <div class=" d-flex flex-column justify-content-evenly text-light ">
                             <h1 class="text-white text-center Iceland py-3">BIENVENUE SUR <br>
                                 STAR'ISLAND</h1>
                             <p class=>
@@ -46,7 +116,7 @@ require_once '../inc/header.inc.php';
                             <!--mettre les col texte et image à 6et 6-->
                             <!--ajouter une autre classe si necessaire-->
 
-                            
+
                             <!--carousel slide w-50 mx-auto 50% et centré -->
 
                             <div id="carouselExampleCaptions" class="carousel slide w-25 mx-auto">
@@ -139,39 +209,69 @@ require_once '../inc/header.inc.php';
             </div>
 
         </section>
-        <div class="bas d-flex flex-column justify-content-center  bg-primary">
+        <div class="bas d-flex flex-column justify-content-center">
             <div class="navigation d-flex  justify-content-center">
                 <button id="rond1" class="btn btn-circle">O</button>
                 <button id="rond2" class="btn btn-circle">O</button>
                 <button id="rond3" class="btn btn-circle">O</button>
             </div>
-            <div class="reseaux-sociaux">
-                <a id="facebook" class="reseaux facebook" href="">
-                    <img src="../assets/img/icons8-facebook.png" alt="facebook">
-                </a>
-                <a id="tiktok" class="reseaux" href="">
-                    <img src="../assets/img/Logo_tiktok.png" alt="tiktok">
-                </a>
-                <a id="twitter" class="reseaux" href="">
-                    <img src="../assets/img/icons8-twitter.png" alt="twitter">
-                </a>
-                <a id="youtube" class="reseaux" href="">
-                    <img src="../assets/img/icons8-youtube.png" alt="youtube">
-                </a>
-                <a id="twitch" class="reseaux" href="">
-                    <img src="../assets/img/logo_twitch.png" alt="twitch">
-                </a>
-                <a id="instagramme" class="reseaux" href="">
-                    <img src="../assets/img/logo_Instagram.png" alt="instagramme">
-                </a>
-                <a id="discorde" class="reseaux" href="">
-                    <img src="../assets/img/icons8-discorde.png" alt="discorde">
-                </a>
+            <div class="reseauSociaux">
+
+                <div class="box">
+                    <input type="checkbox" id="checkbox">
+                    <!--checkbox-->
+                    <!--Menu-->
+                    <div class="menu">
+                        <a href="#">
+                            <div class="menuItems">
+                                <i class="fab fa-whatsapp"></i>
+
+                            </div>
+
+                        </a>
+                        <a href="#">
+                            <div class="menuItems">
+                                <i class="fab fa-instagram"></i>
+
+                            </div>
+
+                        </a>
+
+                        <a href="#">
+                            <div class="menuItems">
+                                <i class="fab fa-facebook"></i>
+
+                            </div>
+
+                        </a>
+                        <a href="#">
+                            <div class="menuItems">
+                                <i class="fab fa-twitter"></i>
+
+                            </div>
+
+                        </a>
+                        <a href="#">
+                            <div class="menuItems">
+                                <i class="fab fa-discord"></i>
+
+                            </div>
+
+                        </a>
+                        <a href="#">
+                            <div class="menuItems">
+                                <i class="fab fa-linkedin"></i>
+
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-<!-- Section Avis-->
+    <!-- Section Avis-->
     <section class="row avis d-flex flex-column align-items-center">
         <div class="container">
             <div class="row mb-5">
@@ -220,7 +320,7 @@ require_once '../inc/header.inc.php';
             </div>
             <div class="row mb-5">
                 <div class="col-12 col-md-6 d-flex justify-content-center ">
-                    <div id="rep3"  class="rep1 bloc d-flex  border border-light">
+                    <div id="rep3" class="rep1 bloc d-flex  border border-light">
                         <div class="p-2">
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class="img-fluid">
                         </div>
@@ -241,7 +341,7 @@ require_once '../inc/header.inc.php';
                     </div>
                 </div>
                 <div class="col-12 col-md-6 d-flex justify-content-center">
-                    <div id="rep4"  class="rep d-flex border border-light">
+                    <div id="rep4" class="rep d-flex border border-light">
                         <div class="p-2">
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
                         </div>
@@ -292,56 +392,56 @@ require_once '../inc/header.inc.php';
 </div>
 
 
-<script>/* variables index rond*/
-const section1 = document.getElementById("section1");
-const button1 = document.getElementById("rond1");
-const section2 = document.getElementById("section2");
-const button2 = document.getElementById("rond2");
-const section3 = document.getElementById("section3");
-const button3 = document.getElementById("rond3");
+<script>
+    /* variables index rond*/
+    const section1 = document.getElementById("section1");
+    const button1 = document.getElementById("rond1");
+    const section2 = document.getElementById("section2");
+    const button2 = document.getElementById("rond2");
+    const section3 = document.getElementById("section3");
+    const button3 = document.getElementById("rond3");
 
 
-button1.addEventListener("click", function () {
-
-  
-    section1.style.opacity = "1";
-   
-    button1.style.color = "white";
-    section3.style.opacity = "0";
-    section2.style.opacity = "0";
-    button2.style.color = "red";
-    button3.style.color = "red";
-    
-
-});
+    button1.addEventListener("click", function() {
 
 
-button2.addEventListener("click", function () {
+        section1.style.opacity = "1";
+
+        button1.style.color = "white";
+        section3.style.opacity = "0";
+        section2.style.opacity = "0";
+        button2.style.color = "red";
+        button3.style.color = "red";
 
 
-    
-    section2.style.opacity = "1";
-   
-    button2.style.color = "white";
-    section1.style.opacity = "0";
-    section3.style.opacity = "0";
-  
-    button1.style.color = "red";
-    button3.style.color = "red";
+    });
 
-});
-button3.addEventListener("click", function () {
 
-            section3.style.opacity = "1";
-       
+    button2.addEventListener("click", function() {
+
+
+
+        section2.style.opacity = "1";
+
+        button2.style.color = "white";
+        section1.style.opacity = "0";
+        section3.style.opacity = "0";
+
+        button1.style.color = "red";
+        button3.style.color = "red";
+
+    });
+    button3.addEventListener("click", function() {
+
+        section3.style.opacity = "1";
+
         button3.style.color = "white";
         section1.style.opacity = "0";
         section2.style.opacity = "0";
         button1.style.color = "red";
         button2.style.color = "red";
-    
-});
 
+    });
 </script>
 
 <?php require_once '../inc/footer.inc.php'; ?>

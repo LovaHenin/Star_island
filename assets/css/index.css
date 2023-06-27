@@ -4,7 +4,7 @@
 }
 
 body {
-   
+
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@ body {
     /* cover->la photo va prendre toute la place*/
     background-size: cover;
     /* Masque la barre de défilement horizontale */
-   
+
 }
 
 /*--------------------Header.php -----------------*/
@@ -48,15 +48,20 @@ body {
     /* border bottom devient vert*/
     border-bottom-color: var(--bs-teal);
 }
+
 /*la taille de la petite maison menu Home*/
 .img-home {
-    width: 130%;
+    /* width: 130%; desktop */
+    position: relative;
+    margin-top: 4vh;
+    width: 10%
 }
+
 /* logo starIsland menu gauche*/
 .logo {
     position: absolute;
-    width: 12%;
-    top: 10%;
+    width: 30%;
+    top: 3%;
     left: 0.2%;
 }
 
@@ -101,9 +106,8 @@ body {
     top: 0;
     left: 0;
     /* fixer et centrer la photo */
-
     /* h500 -> ajouter une hauter de 500px*/
-    height: 700px;
+    height: 600px;
     width: 100%;
 
 }
@@ -204,129 +208,109 @@ body {
 /*---------------------------------------*/
 /* -----------Reseaux sociaux------------*/
 
-.reseaux-sociaux {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+
+#reseaux-sociaux img {
     position: absolute;
-    top: 650px;
+    bottom: -10vh;
+    left: 45vw;
+    transition: all 2s;
+}
+
+.box {
+    display: flex;
+}
+
+#checkbox {
+    width: 3.125rem;
+    height: 3.125rem;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+#checkbox:hover,
+.menu .menuItems:hover {
+    background: transparent;
+}
+
+#checkbox::before {
+    /* code dans checkbox et fontawesone*/
+    content: url('../img/discord.png');
+    font-family: 'fontawesone 5 free';
+    font-weight: 700;
+    font-size: 1.5rem;
+    position: absolute;
+    background: transparent;
+    /*centré*/
+    top: 50%;
     left: 50%;
-    bottom: 9vh;
+    transform: translate(-50%, -50%);
+    color: rgb(41, 41, 41);
+    transition: all 1.5s;
 }
 
+#checkbox:checked::before {
+    content: url('../img/fermer.png');
+    background: transparent;
 
-.reseaux-sociaux a {
+}
+
+/*afficher menu*/
+.menu {
+    width: 0;
+    overflow: hidden;
     display: flex;
-    position: absolute;
-    transition: ease-in-out .9s;
-    width: 3em;
-    height: 3em;
-    opacity: 0;
+    transition: all .5s;
+}
+
+.menu .menuItems {
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    /*border-left: 1px solid rgb(165, 165, 165);*/
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.reseaux-sociaux a.reseaux img {
-    width: 1.5em;
-    height: 1.5em;
-    object-fit: cover;
+/*~ le menu va afficher*/
+#checkbox:checked~.menu {
+    width: 306px;
+    /* 6*50 +6*1 bordure*/
 }
 
-#discorde {
-    display: inline-block;
-    width: 3em;
-    height: 3em;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    opacity: 1;
-
+.menu .menuItems i {
+    font-size: 1.8rem;
 }
 
-
-/* positionner les icones derrière discorde*/
-#discorde img {
-    width: 3em;
-    height: 2.3em;
-    object-fit: cover;
-}
-.reseaux-sociaux #facebook {
-    transform: translateX(0);
-    opacity: 0;
-    transition: ease-in-out .9s;
+.fa-whatsapp {
+    color: #25d366;
 }
 
-.reseaux-sociaux #instagramme {
-    transform: translateX(0);
-    opacity: 0;
-
-    transition: ease-in-out .9s;
+.fa-instagram {
+    color: #c32aa3;
 }
 
-.reseaux-sociaux #tiktok {
-    transform: translateX(0);
-    opacity: 0;
-    transition: ease-in-out .9s
+.fa-facebook {
+    color: #4e869d;
 }
 
-.reseaux-sociaux #twitter {
-    transform: translateX(0);
-    opacity: 0;
-    transition: ease-in-out .9s;
-
+.fa-twitter {
+    color: #1da1f2;
 }
 
-.reseaux-sociaux #youtube {
-    transform: translateX(0);
-    opacity: 0;
-    transition: ease-in-out .9s
+.fa-linkedin {
+    color: #25d366;
 }
 
-.reseaux-sociaux #twitch {
-    transform: translateX(0);
-    opacity: 0;
-    transition: ease-in-out .9s
+.fa-discord {
+    color: #cb4cd4;
 }
 
-/*hover reseau sociaux*/
-
-.reseaux-sociaux:hover #facebook {
-    transform: translateX(3em);
-    opacity: 1;
-}
-
-.reseaux-sociaux:hover #instagramme {
-    transform: translateX(7.5em);
-    transition: ease-in-out .9s;
-    opacity: 1;
-
-}
-
-.reseaux-sociaux:hover #tiktok {
-    transform: translateX(5.5em);
-    transition: ease-in-out .9s;
-    opacity: 1;
-}
-
-.reseaux-sociaux:hover #twitter {
-    transform: translateX(-3em);
-    transition: ease-in-out .9s;
-    opacity: 1;
-}
-
-.reseaux-sociaux:hover #youtube {
-    transform: translateX(-5.5em);
-    transition: ease-in-out .9s;
-    opacity: 1;
-
-}
-
-.reseaux-sociaux:hover #twitch {
-    transform: translateX(-7.5em);
-    transition: ease-in-out .9s;
-    opacity: 1;
-
-}
 
 /* section Avis decalage du à la position absolue des section1,2,3*/
 
@@ -336,9 +320,11 @@ body {
     position: relative;
     top: -30vh;
 }
+
 .bloc {
     width: 300px;
 }
+
 /*-------------Avis------------*/
 .rep {
     border-top-left-radius: 1.5rem;
@@ -367,6 +353,7 @@ body {
     position: relative;
     top: 5rem;
 }
+
 /*--------------------------------------*/
 /*-------------FIN index.php------------*/
 
@@ -390,8 +377,13 @@ body {
 #slider {
     position: relative;
     border: 2px solid red;
-    width: 40%;
-    height: 22vw;
+    top: 15vh;
+    /*Rien desktop*/
+    /* width: 40%;
+    height: 22vw;  desktop*/
+    width: 50%;
+    height: 32vw;
+
     margin: 150px auto;
     font-family: 'Helvetica Neue', sans-serif;
     perspective: 1400px;
@@ -505,40 +497,26 @@ input[type=radio]:checked {
 /* centré le container absolute du à la nav*/
 .titreCentre {
     position: absolute;
-    top: 30vh;
+    top: 20vh;
     left: 50%;
     transform: translateX(-50%);
 }
 
 /*---------VIP-----------*/
 
-/* les deux textes*/
-.sousvip h2 {
-    color: orange;
-    text-decoration: underline;
-}
-/* bordure des personnage*/
-.vipBordure{
-    width:10vw;
-    height: 35vh;
-    border: 4px solid black;
-}
 /* Les 2 personnages*/
-#vipGauche{
+
+
+#vipG {
     position: relative;
-    margin-top:15vh;
+    bottom: 2vh;
 }
-#personnaGauche{
+
+#vipD {
     position: relative;
-    width: 115%;
-    height: 115%;
-    bottom:2.1rem;
-    left:0.5rem
+   
 }
-#personnaDroite{
-    position: relative;
-    right:0.9rem
-}
+
 /*-----------------VIP-----------------*/
 /*----------------FIN vip.php----------------*/
 
@@ -551,17 +529,9 @@ input[type=radio]:checked {
 /*centrés le titre avec un top car le nav est absolute */
 
 /*titre-page => galerie*/
-/* menu*titre*/
-.equipeBloc {
-    width: 150px;
-    height: 50px;
-    border: 2px solid white;
-    margin-right: -2px;
-    box-shadow: 2px 0 0 white;
-    border-radius: 10px;
-  }
+/* titre-centre */
 
-  /*---------------------------------------*/
+/*---------------------------------------*/
 /*--------------FIN Equipe------------------*/
 
 
@@ -569,8 +539,12 @@ input[type=radio]:checked {
 /*-----------------evenement.php-------------*/
 
 /*titreCentre => VIP*/
-    
- /*---------------------------------------*/
+
+#prison{
+    width: 50%;
+}
+
+/*---------------------------------------*/
 /*--------------FIN Evenement------------------*/
 
 /*--------footer-----------*/
@@ -583,8 +557,19 @@ input[type=radio]:checked {
 
 }
 
+.right {
+    /*auto desktop*/
+    margin-right: -12vw;
+}
+
 .footer .right img {
-    width: 30%;
+    /*width: 30%; desktop*/
+    width: 25%;
+}
+
+.left {
+    position: relative;
+    top: 1vh;
 }
 
 .footer .left {
@@ -605,5 +590,6 @@ input[type=radio]:checked {
     background: transparent;
     border: 1px solid orangered;
 }
+
 
 /*------ FIN footer-----------*/

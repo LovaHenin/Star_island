@@ -2,9 +2,29 @@
 require_once '../inc/header.inc.php';
 ?>
 <style>
-        .hidden {
-    display: none;
-}
+    /* -----------Reseaux sociaux------------*/
+
+    .avatar {
+        width: 8vh;
+    }
+
+    .reseauSociaux {
+        position: relative;
+        /*top: 92vh; desktop*/
+        top: 89vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 10vh;
+        bottom: 2vh;
+    }
+
+
+
+
+    .hidden {
+        display: none;
+    }
 
     .extension {
         position: absolute;
@@ -12,42 +32,99 @@ require_once '../inc/header.inc.php';
         /* display: none; */
         /* Autres styles de positionnement */
     }
+
+
+    /*Equipe*/
+    @media (min-width: 768px) {
+        .logo {
+
+            width: 15%;
+        }
+
+        .img-home {
+            margin-top: 4vh;
+            width: 10%
+        }
+
+        #vipG {
+            position: relative;
+            width: 80%;
+
+        }
+
+        .reseauSociaux {
+
+            top: 93vh;
+        }
+
+        .footer .right img {
+            width: 30%;
+
+        }
+
+    }
+
+    @media (min-width: 1200px) {
+        .logo {
+
+            width: 10%;
+        }
+
+        .avatar {
+            width: auto;
+        }
+
+        .img-home {
+            width: 130%;
+            margin-top: 0.5vh;
+        }
+
+        .right {
+            /*auto desktop*/
+            margin-right: -2vw;
+        }
+
+        .reseauSociaux {
+
+            top: 92vh;
+        }
+
+        .footer .right img {
+            width: 30%;
+
+        }
+
+    }
 </style>
 
 
 <div class="titre-page">
     <h1 class="text-light">L'EQUIPE</h1>
 </div>
-
-
-
+<!--col-lg-2 chaque colonne aura une largeur de 2 colonnes sur les écrans de largeur large (≥1200px), col-md-4 une largeur de 4 colonnes sur les écrans de taille moyenne (≥768px) et la classe col-6 une largeur de 6 colonnes sur les écrans de petite taille (<768px).-->
 
 <div class="titreCentre container">
-
-    <div class="row  d-flex">
-        <!--pour centrer un col-12-->
-        <div class="col-12 mb-2 d-flex justify-content-center">
-
-            <div class=" equipeBloc text-center">
-                <a class="text-light" href="#">Tous</a>
-            </div>
-            <div class="equipeBloc text-center">
-                <a class="text-light " href="#">Admins</a>
-            </div>
-            <div class="equipeBloc text-center">
-                <a class="text-light " href="#">Staff/Modos</a>
-            </div>
-            <div class="equipeBloc text-center">
-                <a class="text-light " href="#">Développeurs</a>
-            </div>
-            <div class="equipeBloc text-center">
-                <a class="text-light " href="#">Mappers</a>
-            </div>
-            <div class="equipeBloc text-center">
-                <a class="text-light " href="#">Helpers</a>
-            </div>
+    <div class="row border mb-5">
+        <div class="col-lg-2 col-md-4 col-6 border">
+            <a class="text-light " href="#">Tous</a>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 border">
+            <a class="text-light " href="#">Admins</a>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 border">
+            <a class="text-light " href="#">Staff/Modos</a>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 border">
+            <a class="text-light " href="#">Développeurs</a>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 border">
+            <a class="text-light " href="#">Mappers</a>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 border">
+            <a class="text-light " href="#">Helpers</a>
         </div>
     </div>
+
     <?php
     $mainImagesData = [
         [
@@ -69,7 +146,7 @@ require_once '../inc/header.inc.php';
             'extensions' => [
                 ['src' => '../assets/img/icons8-discorde.png', 'alt' => 'Image 1'],
                 ['src' => '../assets/img/logo_twitch.png', 'alt' => 'Image 2']
-               
+
             ]
         ],
         [
@@ -102,7 +179,7 @@ require_once '../inc/header.inc.php';
             'extensions' => [
                 ['src' => '../assets/img/Logo_tiktok.png', 'alt' => 'Image 1'],
                 ['src' => '../assets/img/icons8-discorde.png', 'alt' => 'Image 2']
-                
+
             ]
         ],
         [
@@ -124,7 +201,7 @@ require_once '../inc/header.inc.php';
             'extensions' => [
                 ['src' => '../assets/img/icons8-discorde.png', 'alt' => 'Image 1'],
                 ['src' => '../assets/img/logo_twitch.png', 'alt' => 'Image 2']
-              
+
             ]
         ],
         [
@@ -191,93 +268,108 @@ require_once '../inc/header.inc.php';
     <?php $rowCount = 0; ?>
     <div class="row">
         <?php foreach ($mainImagesData as $mainImage) : ?>
-            <div class="col-2">
-                <div class="d-flex flex-column">
-                    <img src="<?= $mainImage['src'] ?>" alt="<?= $mainImage['alt'] ?>" class="img-fluid w-75 main-image" onclick="showExtension(this.getAttribute('data-id'))" data-id="<?= $mainImage['id'] ?>">
-                    <p class="text-light"><?= $mainImage['role'] ?></p>
-                    <div class="extension hidden">
-                        <?php foreach ($mainImage['extensions'] as $extension) : ?>
-                            <a href=""><img src="<?= $extension['src'] ?>" alt="<?= $extension['alt'] ?>"></a>
-                        <?php endforeach; ?>
-                    </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <!--img-thumbnail il a un border et bg-->
+                <img src="<?= $mainImage['src'] ?>" alt="<?= $mainImage['alt'] ?>" class="avatar img-thumbnail main-image bg-transparent border-0" onclick="showExtension(this.getAttribute('data-id'))" data-id="<?= $mainImage['id'] ?>">
+                <p class="text-light"><?= $mainImage['role'] ?></p>
+                <div class="extension hidden">
+                    <?php foreach ($mainImage['extensions'] as $extension) : ?>
+                        <a href=""><img class="img-thumbnail bg-transparent border-0" src="<?= $extension['src'] ?>" alt="<?= $extension['alt'] ?>"></a>
+                    <?php endforeach; ?>
                 </div>
             </div>
-            <?php
-            $rowCount++;
-            if ($rowCount % 6 === 0) : // Ajoute une nouvelle ligne après chaque 6 images
-            ?>
+        <?php endforeach; ?>
     </div>
-    <div class="row">
-    <?php endif; ?>
-<?php endforeach; ?>
-    </div>
-
-
-
-
-
-
-
 
 </div>
 
-<div class="reseaux-sociaux">
-    <a id="facebook" class="reseaux facebook" href="">
-        <img src="../assets/img/icons8-facebook.png" alt="facebook">
-    </a>
-    <a id="tiktok" class="reseaux" href="">
-        <img src="../assets/img/Logo_tiktok.png" alt="tiktok">
-    </a>
-    <a id="twitter" class="reseaux" href="">
-        <img src="../assets/img/icons8-twitter.png" alt="twitter">
-    </a>
-    <a id="youtube" class="reseaux" href="">
-        <img src="../assets/img/icons8-youtube.png" alt="youtube">
-    </a>
-    <a id="twitch" class="reseaux" href="">
-        <img src="../assets/img/logo_twitch.png" alt="twitch">
-    </a>
-    <a id="instagramme" class="reseaux" href="">
-        <img src="../assets/img/logo_Instagram.png" alt="instagramme">
-    </a>
-    <a id="discorde" class="reseaux" href="">
-        <img src="../assets/img/icons8-discorde.png" alt="discorde">
-    </a>
+<div class="reseauSociaux">
+
+    <div class="box">
+        <input type="checkbox" id="checkbox">
+        <!--checkbox-->
+        <!--Menu-->
+        <div class="menu">
+            <a href="#">
+                <div class="menuItems">
+                    <i class="fab fa-whatsapp"></i>
+
+                </div>
+
+            </a>
+            <a href="#">
+                <div class="menuItems">
+                    <i class="fab fa-instagram"></i>
+
+                </div>
+
+            </a>
+
+            <a href="#">
+                <div class="menuItems">
+                    <i class="fab fa-facebook"></i>
+
+                </div>
+
+            </a>
+            <a href="#">
+                <div class="menuItems">
+                    <i class="fab fa-twitter"></i>
+
+                </div>
+
+            </a>
+            <a href="#">
+                <div class="menuItems">
+                    <i class="fab fa-discord"></i>
+
+                </div>
+
+            </a>
+            <a href="#">
+                <div class="menuItems">
+                    <i class="fab fa-linkedin"></i>
+
+                </div>
+
+            </a>
+        </div>
+    </div>
 </div>
 
 <script>
-   function showExtension(mainImageId) {
-    var mainImages = document.getElementsByClassName('main-image');
-    var extensionsDiv = document.getElementsByClassName('extension');
+    function showExtension(mainImageId) {
+        var mainImages = document.getElementsByClassName('main-image');
+        var extensionsDiv = document.getElementsByClassName('extension');
 
-    // Masquer toutes les extensions
-    for (var i = 0; i < extensionsDiv.length; i++) {
-        extensionsDiv[i].classList.add('hidden');
-    }
-
-    // Trouver l'index de l'image principale sélectionnée
-    var selectedIndex;
-    for (var i = 0; i < mainImages.length; i++) {
-        if (mainImages[i].getAttribute('data-id') === mainImageId) {
-            selectedIndex = i;
-            // console.log(i);
-            break;
+        // Masquer toutes les extensions
+        for (var i = 0; i < extensionsDiv.length; i++) {
+            extensionsDiv[i].classList.add('hidden');
         }
-    }
 
-    // Positionner l'extension à droite de l'image principale
-    var selectedImage = mainImages[selectedIndex];
-    var selectedExtension = extensionsDiv[selectedIndex];
-    var leftPosition = selectedImage.offsetLeft + selectedImage.offsetWidth;
-    var topPosition = selectedImage.offsetTop;
-    selectedExtension.style.left = leftPosition + 'px';
-    selectedExtension.style.top = topPosition + 'px';
-//    console.log('left' + selectedExtension.style.left);
-//    console.log('top' + selectedExtension.style.top);
-    // Afficher l'extension sélectionnée
-    
-    selectedExtension.classList.remove('hidden');
-}
+        // Trouver l'index de l'image principale sélectionnée
+        var selectedIndex;
+        for (var i = 0; i < mainImages.length; i++) {
+            if (mainImages[i].getAttribute('data-id') === mainImageId) {
+                selectedIndex = i;
+                // console.log(i);
+                break;
+            }
+        }
+
+        // Positionner l'extension à droite de l'image principale
+        var selectedImage = mainImages[selectedIndex];
+        var selectedExtension = extensionsDiv[selectedIndex];
+        var leftPosition = selectedImage.offsetLeft + selectedImage.offsetWidth;
+        var topPosition = selectedImage.offsetTop;
+        selectedExtension.style.left = leftPosition + 'px';
+        selectedExtension.style.top = topPosition + 'px';
+        //    console.log('left' + selectedExtension.style.left);
+        //    console.log('top' + selectedExtension.style.top);
+        // Afficher l'extension sélectionnée
+
+        selectedExtension.classList.remove('hidden');
+    }
 </script>
 
 <?php require_once '../inc/footer.inc.php'; ?>

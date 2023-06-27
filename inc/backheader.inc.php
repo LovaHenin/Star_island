@@ -73,9 +73,9 @@
         <hr class="sidebar-divider d-none d-md-block">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
+            <a class="nav-link collapsed" href="<?= BASE_PATH .'back/media_type.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion caroussel</span>
+                <span>Gestion type de médias</span>
             </a>
         </li>
 

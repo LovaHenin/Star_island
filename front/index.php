@@ -20,11 +20,45 @@ require_once '../inc/header.inc.php';
 
     /*index*/
     @media (min-width: 768px) {
+
+
+        .top img {
+            height: 60%;
+            margin-right: 5%;
+        }
+
+        /*T et P du TOP*/
+        .top span {
+            color: orangered;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+
+        .top h1 {
+            margin-left: 10px;
+        }
+
+        .star {
+
+            font-size: 2rem;
+            left: 3rem;
+            position: relative;
+
+        }
+
+        .titre_sec3 {
+            top: 15vh;
+        }
+
         .logo {
 
             width: 15%;
         }
 
+
+        #carouselExampleCaptions {
+            width: 75%;
+        }
 
 
         .reseauSociaux {
@@ -49,7 +83,16 @@ require_once '../inc/header.inc.php';
             width: 10%;
         }
 
+        #carouselExampleCaptions {
+            width: 40%;
+        }
 
+        .star {
+
+
+            left: 17rem;
+
+        }
 
         .img-home {
             width: 130%;
@@ -58,7 +101,7 @@ require_once '../inc/header.inc.php';
 
         .reseauSociaux {
 
-            top: 68vh;
+            top: 90vh;
         }
 
         .right {
@@ -78,7 +121,7 @@ require_once '../inc/header.inc.php';
 <div class="home">
     <div class="row">
 
-        <section id="section1" class=" titre-center banner d-flex justify-content-center  align-items-center ">
+        <section id="section1" class=" banner d-flex justify-content-center  align-items-center ">
 
             <!-- ajouter marge y-->
             <div class="container">
@@ -119,7 +162,7 @@ require_once '../inc/header.inc.php';
 
                             <!--carousel slide w-50 mx-auto 50% et centré -->
 
-                            <div id="carouselExampleCaptions" class="carousel slide w-25 mx-auto">
+                            <div id="carouselExampleCaptions" class="carousel slide  mx-auto">
                                 <div class="carousel-indicators">
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -171,25 +214,25 @@ require_once '../inc/header.inc.php';
                         <!-- mettre chaque premiere lette en majuscule et la police à Iceland-->
 
                         <div class=" titre d-flex flex-column justify-content-evenly text-light ">
-                            <h1 class="text-white text-center Iceland py-3">BIENVENUE SUR <br>
+                            <h1 class="titre_sec3 text-center Iceland ">BIENVENUE SUR <br>
                                 STAR'ISLAND</h1>
                         </div>
                         <!--border border-light w-75 mettre une bordure et reduire la taille à 75%-->
                         <div class="comment d-flex flex-column justify-content-evenly text-light  border border-light w-75">
-                            <div class="d-flex  px-4">
-                                <div class="top d-flex">
+                            <div class="d-flex m-3">
+                                <div class="top d-flex justify-content-center">
                                     <span>T</span>
-                                    <img src="<?= BASE_PATH . 'assets/img/topserveur.png' ?>" alt="" class="ms-3">
+                                    <img src="<?= BASE_PATH . 'assets/img/topserveur.png' ?>" alt="" class="">
                                     <span>P</span>
 
                                 </div>
                                 <div class="star">
                                     <p>Star Island</p>
-                                    <p>
+
                                 </div>
 
                             </div>
-                            <div class="etoile d-flex justify-content-center my-2  mt-2">
+                            <div class="etoile d-flex justify-content-center">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
@@ -282,7 +325,7 @@ require_once '../inc/header.inc.php';
                         </div>
 
                         <div class="ps-2">
-                            <div class="d-flex justify-content-around  mt-2">
+                            <div class="etoile_avis d-flex justify-content-around  mt-2">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
@@ -302,7 +345,7 @@ require_once '../inc/header.inc.php';
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
                         </div>
                         <div class="ps-2">
-                            <div class="d-flex justify-content-around  mt-2">
+                            <div class="etoile_avis d-flex justify-content-around  mt-2">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
@@ -326,7 +369,7 @@ require_once '../inc/header.inc.php';
                         </div>
 
                         <div class="ps-2">
-                            <div class="d-flex justify-content-around  mt-2">
+                            <div class="etoile_avis d-flex justify-content-around  mt-2">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
@@ -346,7 +389,7 @@ require_once '../inc/header.inc.php';
                             <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
                         </div>
                         <div class="ps-2">
-                            <div class="d-flex justify-content-around  mt-2">
+                            <div class="etoile_avis d-flex justify-content-around  mt-2">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                                 <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
@@ -371,7 +414,7 @@ require_once '../inc/header.inc.php';
                             <p>
                         </div>
 
-                        <div class="etoile d-flex justify-content-center my-2  mt-2">
+                        <div class="etoile_avis etoile d-flex justify-content-center my-2  mt-2">
                             <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                             <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
                             <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">

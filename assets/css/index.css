@@ -132,14 +132,15 @@ body {
 
 /*---------------Section 3-------------*/
 .top img {
-    width: 30%;
+    height: 20%;
     margin-right: 5%;
 }
 
+/*T et P du TOP*/
 .top span {
     color: orangered;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 .top h1 {
@@ -149,28 +150,39 @@ body {
 .top p {
     color: black;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1rem;
+
+}
+
+.titre_sec3 {
+    position: relative;
+    top: 10vh;
+    color: white;
 
 }
 
 /* class sur <p> votre avis nous interresse et star island*/
 
 .star {
-    margin-left: 30%;
+
     color: rgb(233, 231, 231);
     font-weight: bold;
-    font-size: 2rem;
+
 }
 
 /* text area votre commentaire*/
 .message,
 .comment {
     border-radius: 0.9rem;
+
+    width: 75%;
+
 }
 
 /* etoile votre commentaire*/
 .etoile img {
     margin-right: 1rem;
+    width: 3vh;
 }
 
 
@@ -203,6 +215,10 @@ body {
     left: 0;
     width: 100%;
 
+}
+.etoile_avis img{
+    margin-right: 1rem;
+    width: 3vh;
 }
 
 /*---------------------------------------*/
@@ -514,7 +530,7 @@ input[type=radio]:checked {
 
 #vipD {
     position: relative;
-   
+
 }
 
 /*-----------------VIP-----------------*/
@@ -540,7 +556,7 @@ input[type=radio]:checked {
 
 /*titreCentre => VIP*/
 
-#prison{
+#prison {
     width: 50%;
 }
 

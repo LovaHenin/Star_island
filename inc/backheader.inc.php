@@ -91,9 +91,9 @@
 
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
+            <a class="nav-link collapsed" href="<?= BASE_PATH .'back/content.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion formule</span>
+                <span>Gestion content</span>
             </a>
         </li>
 

@@ -100,9 +100,9 @@
 
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
+            <a class="nav-link collapsed" href="<?= BASE_PATH .'back/media.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion bar / cave</span>
+                <span>Gestion Média</span>
             </a>
         </li>
 

@@ -50,12 +50,12 @@ if (!empty($_POST)) {
 
 
 
-// contenues de la table page pour affichage dans le tableau
+// contenues de la table page pour affichage dans le select
 $pages = execute("SELECT*FROM page")->fetchAll(PDO::FETCH_ASSOC);
 //debug($pages);
 
 
-// contenues de la table page pour affichage dans le tableau
+// contenues de la table content juste pour id_content=>hidden
 $contents = execute("SELECT*FROM content")->fetchAll(PDO::FETCH_ASSOC);
 //debug($contents);
 

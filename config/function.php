@@ -10,6 +10,7 @@ function debug($data)
 
 function execute(string $requete, array $data=[],$lastId=null)
 {
+  
     // boucle pour echapper les caractères speciaux (pour neutraliser les balise <style> ou <script>) en entité html et de même supprimer les espaces éventuels en début de fin de chaine de caractère
     foreach ($data as $marqueur => $valeur){
         // ici on réaffecte à notre tableau $data

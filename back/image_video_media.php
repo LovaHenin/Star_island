@@ -28,7 +28,7 @@ WHERE mt.title_media_type!=:links",
 
 //=> pour supprimer
 
-if (!empty($_GET) && isset($_GET['id'])){
+if (!empty($_GET) && isset($_GET['id'])) {
 
     $supprfait = execute(
         "DELETE FROM media WHERE id_media=:id",
@@ -57,17 +57,20 @@ require_once '../inc/backheader.inc.php';
     }
 </style>
 
-<div class="card" style="width: 10rem;">
 
+<div class="d-flex ">
 <?php foreach ($medias_images_videos as $media) : ?>
-    
-    <img src="<?=  '../assets/'.$media['title_media']; ?>" class="card-img-top" alt="<?= $media['name_media']   ?>">
-    <div class="card-body">
-        <h5 class="card-title"><?= $media['name_media']   ?></h5>
-        <a href="?id=<?= $media['id_media']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-primary"> Supprimer</a>
-    </div>
-    <?php endforeach; ?>
+ 
+    <div class="card mr-3" style="width: 10rem;">
 
+        <img src="<?= '../assets/' . $media['title_media']; ?>" class="card-img-top" alt="<?= $media['name_media']   ?>">
+        <div class="card-body">
+            <h5 class="card-title"><?= $media['name_media']   ?></h5>
+            <a href="?id=<?= $media['id_media']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-primary"> Supprimer</a>
+        </div>
+
+    </div>
+<?php endforeach; ?>
 </div>
 
 

@@ -49,8 +49,9 @@ if (!empty($_GET) && isset($_GET['id'])&& $_GET['a'] == 'del'){
 //=> pour modif
 if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'edit') {
 
-    $variable = $_GET['id'];
-    $url = "./formulaire_media.php?variable=" . urlencode($variable);
+    $id_media_modif = $_GET['id'];
+    $title_media_modif=$links;
+    $url = "./formulaire_media.php?id_media_modif=" . urlencode($id_media_modif) ."&title_media_modif=" .urlencode($title_media_modif);
     header("Location: " . $url);
     exit();
 

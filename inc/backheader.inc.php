@@ -54,19 +54,14 @@
                 gestion
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="<?= BASE_PATH . 'back/teams.php'; ?>" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Gestion pastille</span>
+                    <span>Teams</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="dropdown-item" href="">Gestion Commande</a>
-                    </div>
-                </div>
+               
             </li>
 
             <hr class="sidebar-divider d-none d-md-block">
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="<?= BASE_PATH . 'back/media_type.php'; ?>">
                     <i class="fas fa-fw fa-wrench"></i>

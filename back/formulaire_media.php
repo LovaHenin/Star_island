@@ -8,7 +8,7 @@ if (!empty($_POST)) {
     $error = false;
 
 
-        // input name
+    // input name
     if (empty($_POST['name_media'])) {
 
         $message_name = 'ce champ est obligatoire';
@@ -17,11 +17,10 @@ if (!empty($_POST)) {
 
     // pour file
     if (empty($_FILES['title_media']['name'])) {
-        if( empty($_POST['title_media']) ){
+        if (empty($_POST['title_media'])) {
             $picture = 'title media obligatoire';
             $error = true;
         }
-       
     } else {
         $picture = '';
         // verifier les formats
@@ -39,17 +38,16 @@ if (!empty($_POST)) {
         }
     }
 
-// debug( $_POST['title_media']);
-//die;
+    // debug( $_POST['title_media']);
+    //die;
     if (!$error) { //insert
         // si pas de retour id dans POST=> insert
-      
+
         $picture_bdd = '../assets/upload/' . uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . $_FILES['title_media']['name'];
         //debug($picture_bdd);
         // on la copie dans le dossier upload
         copy($_FILES['title_media']['tmp_name'], $picture_bdd);
 
-        if(isset($variable)) {
         $resultat = execute("INSERT INTO media (title_media,name_media,id_media_type) VALUES (:title_media,:name_media,:id_media_type)", array(
             //condition ternaire
             ':title_media' => !empty($_FILES['title_media']['name']) ? $picture_bdd : $_POST['title_media'],
@@ -60,26 +58,6 @@ if (!empty($_POST)) {
         $_SESSION['messages']['success'][] = 'media ajoutée';
         header('location:./formulaire_media.php');
         exit();
-
-    }else{
-        $media = execute(
-
-            "SELECT m.title_media,m.name_media,mt.title_media_type,mt.id_media_type,m.id_media
-            FROM media m
-            INNER JOIN media_type mt
-            ON m.id_media_type= mt.id_media_type
-            WHERE id_content=:id",
-            array(
-                ':id' => $_GET['variable']//get de link_media
-            )
-        )->fetch(PDO::FETCH_ASSOC);
-
-      debug("coucou" . $media);
-      
-
-
-
-    }
     }
 } // fin insert & upadate
 
@@ -88,8 +66,62 @@ if (!empty($_POST)) {
 $medias_type = execute("SELECT*FROM media_type ")->fetchAll(PDO::FETCH_ASSOC);
 //debug($medias_type);
 
+//debug($_GET['id_media_modif']);
+//debug($_GET['title_media_modif']);
+
+//=> pour modif
+
+if (!empty($_GET)) {
+    // les valeurs de $page à retourner au formulaire-> value
+    $media = execute(
+        "SELECT m.title_media,m.name_media,mt.id_media_type,m.id_media
+        FROM media m
+        INNER JOIN media_type mt
+        ON m.id_media_type=mt.id_media_type
+        WHERE id_media=:id",
+        array(
+            ':id' => $_GET['id_media_modif']
+        )
+    )->fetch(PDO::FETCH_ASSOC);
 
 
+    //debug($media);
+    if (!empty($_POST)) {
+
+        $errormod = false;
+
+
+        // input name
+        if (empty($_POST['name_media_mod'])) {
+
+            $message_name = 'ce champ est obligatoire';
+            $errormod = true;
+        }
+        if (empty($_POST['title_media_mod'])) {
+
+            $message_name = 'ce champ est obligatoire';
+            $errormod = true;
+        }
+
+        if (!$errormod) { //modif
+
+            execute(
+                "UPDATE media SET title_media=:title_media,name_media=:name_media,id_media_type=:id_media_type WHERE id_media=:id_media",
+                array(
+                    // les POST venant du formulaire
+                    ':title_media' => $_POST['title_media_mod'],
+                    ':name_media' => $_POST['name_media_mod'],
+                    ':id_media_type' => $media['id_media_type'],
+                    ':id_media' => $media['id_media']
+                )
+            );
+            $_SESSION['messages']['success'][] = 'Media modifiée';
+            header('location:./links_media.php');
+            exit();
+        }
+
+    }
+}
 
 
 
@@ -97,57 +129,75 @@ require_once '../inc/backheader.inc.php';
 ?>
 
 
-<form action="" method="post"  class="w-50 mx-auto mt-5 mb-5" enctype="multipart/form-data">
+<?php if (empty($_GET)) : ?>
 
-    <legend class="ml-3">MEDIA</legend>
+    <form action="" method="post" class="w-50 mx-auto mt-5 mb-5" enctype="multipart/form-data">
 
-
-    <div class="form-group w-25">
-        <small class="text-danger">*</small>
-        <label for="selection">Type de média</label>
-        <select id="selection" class="form-control" name="Select_id_media_type" onchange="toggleField()">
-            <?php foreach ($medias_type as $media_type) : ?>
-
-                <option value="<?= $media_type['id_media_type'] ?>" <?php if (isset($media['Select_id_media_type']) && $media_type['id_media_type'] ==$variable) {
-                                                            echo " selected";
-                                                        } ?>> <?= $media_type['title_media_type'] ?> </option>
-
-            <?php endforeach; ?>
-        </select>
-    </div>
+        <legend class="ml-3">MEDIA</legend>
 
 
+        <div class="form-group w-25">
+
+            <small class="text-danger">*</small>
+            <label for="selection">Type de média</label>
+
+            <select id="selection" class="form-control" name="Select_id_media_type" onchange="toggleField()">
+                <?php foreach ($medias_type as $media_type) : ?>
+
+                    <option value="<?= $media_type['id_media_type'] ?>"><?= $media_type['title_media_type'] ?> </option>
+
+                <?php endforeach; ?>
+            </select>
 
 
-   
-
-
-
-
-    <div class="form-group mb-3">
-        <small class="text-danger">*</small>
-        <label for="titre">Name(ALT)</label>
-        <input name="name_media" type="text" class="form-control w-75" id="name_media" placeholder="Entrez le nom" value="">
-        <small class="text-danger"> <?= $message_name ?? ''; ?></small>
-    </div>
-    <div class="form-group mb-3" id="title_media_file">
-        <small class="text-danger">*</small>
-        <label for="title_media" class="form-label">Title</label>
-         <!-- avec loaadfile =>ajouter enctype dans form-->
-        <input onchange="loadFile()" name="title_media" type="file" class="form-control" id="title_media">
-        <small class="text-danger"><?= $picture ?? ''; ?></small>
-        <div class="text-center">
-            <img id="image" class="w-25 rounded mt-3 rounded-circle " alt="">
         </div>
-    </div>
-    <div class="form-group mb-3 d-none" id="title_media_text">
-        <input type="text" name="title_media" placeholder="Entrez le titre" id="title_media" value="">
-        <small class="text-danger"> <?= $error ?? ''; ?></small>
-        <input type="hidden" name="id_media" value="<?= $page['id_media'] ?? ''; ?>">
-    </div>
-    <button type="submit" class="btn btn-primary">Valider</button>
-</form>
 
+
+        <div class=" form-group mb-3">
+            <small class="text-danger">*</small>
+            <label for="titre">Name</label>
+            <input name="name_media" type="text" class="form-control w-75" id="name_media" placeholder="Entrez le nom" value="">
+            <small class="text-danger"> <?= $message_name ?? ''; ?></small>
+        </div>
+        <div class="form-group mb-3" id="title_media_file">
+            <small class="text-danger">*</small>
+            <label for="title_media" class="form-label">Title</label>
+            <!-- avec loaadfile =>ajouter enctype dans form-->
+            <input onchange="loadFile()" name="title_media" type="file" class="form-control" id="title_media">
+            <small class="text-danger"><?= $picture ?? ''; ?></small>
+            <div class="text-center">
+                <img id="image" class="w-25 rounded mt-3 rounded-circle " alt="">
+            </div>
+        </div>
+        <div class="form-group mb-3 d-none" id="title_media_text">
+            <small class="text-danger">*</small>
+            <label for="title_media" class="form-label">Title</label>
+            <input type="text" name="title_media" class="form-control w-75" placeholder="Entrez le titre" id="title_media" value="">
+            <small class="text-danger"> <?= $error ?? ''; ?></small>
+            <input type="hidden" name="id_media" value="<?= $page['id_media'] ?? ''; ?>">
+        </div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </form>
+
+<?php else : ?>
+    <form action="" method="post" class="w-50 mx-auto mt-5 mb-5" enctype="multipart/form-data">
+
+        <div class=" form-group mb-3">
+            <small class="text-danger">*</small>
+            <label for="name_media_mod"">Name</label>
+            <input name="name_media_mod" type="text" class="form-control w-75" id="name_media_mod" placeholder="Entrez le nom" value="<?= $media['name_media'] ?? ''; ?>">
+            <small class="text-danger"> <?= $message_name ?? ''; ?></small>
+        </div>
+
+        <div class="form-group mb-3" id="title_media_file">
+            <small class="text-danger">*</small>
+            <label for="title_media_mod" class="form-label">Title</label>
+            <input type="text" name="title_media_mod" class="form-control w-75" placeholder="Entrez le titre" id="title_media_mod" value="<?= $media['title_media'] ?? ''; ?>">
+
+        </div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </form>
+<?php endif; ?>
 
 
 

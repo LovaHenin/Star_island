@@ -12,9 +12,17 @@ $roles = array(
 
 
 
+$galeries = execute(
+    "
+    SELECT m.title_media
+    FROM media m
+    INNER JOIN media_type mt
+    ON m.id_media_type=mt.id_media_type
+    WHERE (mt.title_media_type='galerie')"
+    
+)->fetchAll(PDO::FETCH_ASSOC);
 
-
-
+debug($galeries);
 
 
 
@@ -23,11 +31,8 @@ $medias_type = execute("SELECT*FROM media_type ")->fetchAll(PDO::FETCH_ASSOC);
 //debug($medias_type);
 
 
-
-
-
-
-
+$teams = execute("SELECT * FROM team")->fetchAll(PDO::FETCH_ASSOC);
+//debug($teams);
 
 
 
@@ -83,7 +88,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="discordDiv" style="display: none;">
-            <input type="text" class="w-50" name="lienDiscord" id="lienDiscord">
+            <input type="text" class="w-50" name="lien['Discord']" id="lienDiscord">
         </div>
     </div>
 
@@ -93,7 +98,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="facebookDiv" style="display: none;">
-            <input type="text" class="w-50" name="lienFacebook" id="lienFacebook">
+            <input type="text" class="w-50" name="lien['Facebook']" id="lienFacebook">
         </div>
     </div>
 
@@ -103,7 +108,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="twitterDiv" style="display: none;">
-            <input type="text" class="w-50" name="lienTwitter" id="lienTwitter">
+            <input type="text" class="w-50" name="lien['Twitter']" id="lienTwitter">
         </div>
     </div>
 
@@ -113,7 +118,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="tiktokDiv" style="display: none;">
-            <input type="text" class="w-50" name="lienTiktok" id="lienTiktok">
+            <input type="text" class="w-50" name="lien['Tiktok']" id="lienTiktok">
         </div>
     </div>
 
@@ -123,7 +128,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="youtubeDiv" style="display: none;">
-            <input type="text" class="w-50" name="lienYoutube" id="lienYoutube">
+            <input type="text" class="w-50" name="lien['Youtube']" id="lienYoutube">
         </div>
     </div>
 
@@ -133,7 +138,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="instagramDiv" style="display: none;">
-            <input type="text" class="w-50" name="lienInstagram" id="lienInstagram">
+            <input type="text" class="w-50" name="lien['Instagram']" id="lienInstagram">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Valider</button>
@@ -151,51 +156,128 @@ require_once '../inc/backheader.inc.php';
         </tr>
     </thead>
     <tbody>
+        <?php foreach ($teams as $team) : 
+        
+             $medias_links = execute(
+                "
+                SELECT m.name_media,m.title_media,m.id_media_type
+                FROM media m
+                INNER JOIN team_media tm
+                ON m.id_media=tm.id_media
+                INNER JOIN media_type mt
+                ON m.id_media_type=mt.id_media_type
+                WHERE (tm.id_team=:id_team AND mt.title_media_type='liens')",
+                array(
+                    ':id_team' => $team['id_team']
+                )
+            )->fetchAll(PDO::FETCH_ASSOC);
+            
 
-
-        <tr>
-            <td><?php ?></td>
-            <td><?Php ?></td>
-            <td>
-
-            <table class="table table-dark table-striped  mx-auto">
-    <thead>
-        <tr>
-            <th>Avatar</th>
-            <th>Liens</th>
-             <th class="text-center">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-
+             $medias_avatar = execute(
+                "
+                SELECT m.name_media,m.title_media,m.id_media_type,mt.title_media_type
+                FROM media m
+                INNER JOIN team_media tm
+                ON m.id_media=tm.id_media
+                INNER JOIN media_type mt
+                ON m.id_media_type=mt.id_media_type
+                WHERE (tm.id_team=:id_team AND mt.title_media_type='AvatarsTeams')",
+                array(
+                    ':id_team' => $team['id_team']
+                )
+            )->fetchAll(PDO::FETCH_ASSOC);
+            
+            ?>
 
             <tr>
-                <td><?php ?></td>
-                <td><?php ?></td>
-              
+                <td><?= $team['nickname_team'] ?></td>
+                <td><?= $team['role_team'] ?></td>
                 <td>
-                  
-                    <a href="?id=<?= $media['id_media']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
+
+                    <table class="table table-dark table-striped  mx-auto">
+                        <thead>
+                            <tr>
+                                <th>Liens</th>
+                                <th>Avatar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr>
+                                    <td>
+                                        <table class="table table-dark table-striped  mx-auto">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Nom</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach ($medias_links as $media_link) : ?>
+
+                                                <tr>
+                                                    <td><?= $media_link['title_media'] ?></td>
+
+                                                    <td>
+
+                                                        <a href="?id=<?php ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
+
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+
+
+                                    </td>
+                                    <td>
+
+                                        <table class="table table-dark table-striped  mx-auto">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Nom</th>
+                                                    <th class="text-center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach ($medias_avatar as $media_avatar) : ?>
+
+                                                <tr>
+                                                <td><img width="90" src="<?=  '../assets/'.$media_avatar['title_media']; ?>" alt="<?php  ?>"></td>
+
+                                                    <td>
+
+                                                        <a href="?id=<?php ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
+
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+
+                                    </td>
+
+
+                                </tr>
+                           
+                        </tbody>
+                    </table>
+
+
+
+
+
+
+                </td>
+                <td>
+
+                    <a href="#" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
 
                 </td>
             </tr>
-      
-    </tbody>
-</table>
-
-
-
-
-
-
-            </td>
-            <td>
-
-                <a href="#" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
-
-            </td>
-        </tr>
-
+        <?php endforeach; ?>
     </tbody>
 </table>
 
@@ -205,6 +287,17 @@ require_once '../inc/backheader.inc.php';
 
 
 <script>
+   let loadFile = function() {
+        let image = document.getElementById('image');
+
+        image.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    window.onload = function() {
+    var myElement = document.getElementById('myElement');
+    myElement.onload = loadFile;
+  };
+
     function afficherChampText() {
         var checkboxDiscord = document.getElementsByName("checkboxDiscord")[0];
         var discordDiv = document.getElementById("discordDiv");

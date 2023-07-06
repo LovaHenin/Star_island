@@ -565,6 +565,8 @@ input[type=radio]:checked {
 
 /*--------footer-----------*/
 .footer {
+    position: relative;
+   margin-bottom: 0;
     margin-top: auto;
     display: flex;
     justify-content: space-between;

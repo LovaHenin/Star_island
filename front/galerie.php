@@ -101,19 +101,30 @@ require_once '../inc/header.inc.php';
     <input type="radio" name="slider" id="s5">
 
     <?php
-    $imagePaths = [
-      "../assets/img/gta_decors1.jpg",
-      "../assets/img/predation2.png",
-      "../assets/img/prison.jpg",
-      "../assets/img/teaser.jpg",
-      "../assets/img/gta_decors2 2.png"
-    ];
+    $imagePaths = execute(
+      "
+      SELECT m.title_media
+      FROM media m
+      INNER JOIN media_type mt
+      ON m.id_media_type=mt.id_media_type
+      WHERE (mt.title_media_type='galerie')"
+      
+  )->fetchAll(PDO::FETCH_ASSOC);
+
+
+    //[
+    //   "../assets/img/gta_decors1.jpg",
+    //   "../assets/img/predation2.png",
+    //   "../assets/img/prison.jpg",
+    //   "../assets/img/teaser.jpg",
+    //   "../assets/img/gta_decors2 2.png"
+    // ];
 
     for ($i = 0; $i < count($imagePaths); $i++) {
       $slideNumber = $i + 1;
       $inputId = "s" . $slideNumber;
       $labelId = "slide" . $slideNumber;
-      $imagePath = $imagePaths[$i];
+      $imagePath = $imagePaths[$i]['title_media'];
     ?>
 
       <label for="<?php echo $inputId; ?>" id="<?php echo $labelId; ?>">

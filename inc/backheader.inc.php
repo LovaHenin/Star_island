@@ -105,28 +105,31 @@
                     </a>
                     <a class="dropdown-item" href="<?= BASE_PATH . 'back/image_video_media.php'; ?>">
                         <i class="fas fa-fw fa-wrench"></i>
-                        <span>Media image et video</span>
+                        <span>Media image,galérie et video</span>
                     </a>
-
+                    <a class="dropdown-item" href="<?= BASE_PATH . 'back/galerie.php'; ?>">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Galérie</span>
+                    </a>
                 </div>
             </li>
 
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="">
+                <a class="nav-link collapsed" href="<?= BASE_PATH . 'back/comment.php'; ?>">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Gestion navigation</span>
+                    <span>Comment</span>
                 </a>
             </li>
 
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="">
+                <a class="nav-link collapsed" href="<?= BASE_PATH . 'back/event.php'; ?>">
 
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Gestion evènements</span>
+                    <span>Event</span>
                 </a>
             </li>
 

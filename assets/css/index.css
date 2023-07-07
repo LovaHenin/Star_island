@@ -216,10 +216,22 @@ body {
     width: 100%;
 
 }
-.etoile_avis img{
+
+.etoile_avis img {
     margin-right: 1rem;
     width: 3vh;
 }
+
+/*--------------ecart entre les 2*/
+
+/* .bas {
+    width: 100%;
+    padding: 2px;
+  }
+  
+  .navigation, .reseauSociaux {
+    margin-top: 15px;
+  } */
 
 /*---------------------------------------*/
 /* -----------Reseaux sociaux------------*/
@@ -565,8 +577,8 @@ input[type=radio]:checked {
 
 /*--------footer-----------*/
 .footer {
-    position: relative;
-   margin-bottom: 0;
+    /* position: relative;
+    bottom: 0; */
     margin-top: auto;
     display: flex;
     justify-content: space-between;

@@ -9,9 +9,131 @@ $roles = array(
 
 );
 
+// controle de formulaire si input est vide
+if (!empty($_POST)) {
+
+
+    $error = false;
+
+
+    // input Dates et content pas vide
+
+
+    if (empty($_POST['nickname_team'])) {
+
+        $message_nickname = 'ce champ est obligatoire';
+        $error = true;
+    }
+    if ($_POST['Select_id_media_type'] == 'Choisir un role') {
+
+        $message_role = 'il faut choisir un role';
+        $error = true;
+    }
+
+    // pour file
+    if (empty($_FILES['title_media']['name'])) {
+        if (empty($_POST['title_media'])) {
+            $picture = 'Avatar obligatoire';
+            $error = true;
+        }
+    } else {
+        $picture = '';
+        // verifier les formats
+        $formats = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/webp'];
+
+        // inarray verifie si le ['picture_profil']['type'] est dans le tableau $formats
+        if (!in_array($_FILES['title_media']['type'], $formats)) {
+            $picture .= "les formats autorisé sont 'image/png', 'image/jpg','image/jpeg','image/gif','image/webp'<br>";
+            $erreur = true;
+        }
+        // verifier la taille de l'image
+        if ($_FILES['title_media']['size'] > 200000000) {
+            $picture .= " Taille maximale de autorisée de 20M";
+            $erreur = true;
+        }
+    }
+
+  
+
+//A revoir lien , role
+    //debug();
+    //die;
+    if (!$error) { //insert
+
+        if (empty($_GET['id_teams'])) {
+
+            // pour l'image type file
+            $picture_bdd = '../assets/upload/' . uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . $_FILES['title_media']['name'];
+            //debug($picture_bdd);
+            // on la copie dans le dossier upload
+            copy($_FILES['title_media']['tmp_name'], $picture_bdd);
+
+            // ajout dans Team
+            $lastIdTeam = execute("INSERT INTO team (role_team,nickname_team) VALUES (:role_team,:nickname_team)", array(
+                ':role_team' => $_POST['Select_id_media_type'],
+                ':nickname_team' => $_POST['nickname_team']
+
+            ), 'ggg');
+
+            // recuperation de id_media_type Avatar
+            $id_media_type_avatar =  execute("SELECT id_media_type FROM media_type WHERE title_media_type =:title_media_type", array(
+                ':title_media_type' => 'AvatarsTeams'
+            ))->fetch(PDO::FETCH_ASSOC);
+
+            // recuperation de id_media_type Avatar
+            $id_media_type_liens =  execute("SELECT id_media_type FROM media_type WHERE title_media_type =:title_media_type", array(
+                ':title_media_type' => 'liens'
+            ))->fetch(PDO::FETCH_ASSOC);
+            //debug($id_media_type_liens);
+            //die;
+
+            //ajouter title_media, name_media, id_media_type dans la table media
+            $lastIdMediaAvatar = execute("INSERT INTO media (title_media,name_media,id_media_type) VALUES (:title_media,:name_media,:id_media_type)", array(
+                ':title_media' =>  !empty($_FILES['title_media']['name']) ? $picture_bdd : $_POST['title_media'],
+                ':name_media' => 'avatar',
+                ':id_media_type' => $id_media_type_avatar['id_media_type']
+
+            ), 'ggg');
+
+            $lastIdMediaLink = execute("INSERT INTO media (title_media,name_media,id_media_type) VALUES (:title_media,:name_media,:id_media_type)", array(
+                ':title_media' => $_POST['discord'],
+                ':name_media' => 'avatar',
+                ':id_media_type' => $id_media_type_liens['id_media_type']
+
+            ), 'ggg');
+
+            // ajouter id_media et id_team dans team_media
+            execute("INSERT INTO team_media (id_media,id_team) VALUES (:id_media,:id_team)", array(
+                ':id_media' =>  $lastIdMediaAvatar,
+                ':id_team' => $lastIdTeam,
+
+            ));
+
+            // ajouter id_media et id_team dans team_media
+            execute("INSERT INTO team_media (id_media,id_team) VALUES (:id_media,:id_team)", array(
+                ':id_media' =>  $lastIdMediaLink,
+                ':id_team' => $lastIdTeam,
+
+            ));
+
+            $_SESSION['messages']['success'][] = 'Evénement ajouté';
+            header('location:./event.php');
+            exit();
+        } else { //sinon=> id existe dans POST modification
+
+        }
+    }
+}
 
 
 
+
+
+
+
+
+
+// pour afficher le tableau en dessous
 $galeries = execute(
     "
     SELECT m.title_media
@@ -19,10 +141,10 @@ $galeries = execute(
     INNER JOIN media_type mt
     ON m.id_media_type=mt.id_media_type
     WHERE (mt.title_media_type='galerie')"
-    
+
 )->fetchAll(PDO::FETCH_ASSOC);
 
-debug($galeries);
+//debug($galeries);
 
 
 
@@ -44,19 +166,22 @@ require_once '../inc/backheader.inc.php';
 ?>
 
 <h1 class="d-flex justify-content-center">Teams</h1>
-<form action="" method="post" class="w-50 mx-auto mt-5 mb-5">
+<form action="" method="post" class="w-50 mx-auto mt-5 mb-5" enctype="multipart/form-data">
 
     <div class="mb-3">
         <small class="text-danger">*</small>
-        <label for="" class="form-label">Nom</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Votre nom">
+        <label for="nickname_team" class="form-label">Nom</label>
+        <input name="nickname_team" type="text" class="form-control w-50" id="nickname_team" placeholder="Votre nom">
+        <small class="text-danger"> <?= $message_nickname ?? ''; ?></small>
     </div>
 
     <div class="mb-3">
         <small class="text-danger">*</small>
-        <label for="role_team" class="form-label">Role</label>
+        <label for="selection" class="form-label">Role :</label>
+        <small class="text-danger"><?= $message_role ?? ''; ?></small>
         <select id="selection" class="form-control w-25" name="Select_id_media_type" onchange="toggleField()">
             <option selected>Choisir un role</option>
+            <small class="text-danger"><?= $message_role ?? ''; ?></small>
             <?php foreach ($roles as $cle => $role) : ?>
 
                 <option value="<?= $cle ?>"><?= $role ?> </option>
@@ -64,7 +189,6 @@ require_once '../inc/backheader.inc.php';
             <?php endforeach; ?>
         </select>
 
-        </select>
 
     </div>
 
@@ -74,7 +198,7 @@ require_once '../inc/backheader.inc.php';
         <small class="text-danger">*</small>
         <label for="title_media" class="form-label">Choisir un avatar</label>
         <!-- avec loaadfile =>ajouter enctype dans form-->
-        <input onchange="loadFile()" name="title_media" type="file" class="form-control" id="title_media">
+        <input onchange="loadFile()" name="title_media" type="file" class="form-control w-50" id="title_media">
         <small class="text-danger"><?= $picture ?? ''; ?></small>
         <div class="text-center">
             <img id="image" class="w-25 rounded mt-3 rounded-circle " alt="">
@@ -88,7 +212,8 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="discordDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Discord']" id="lienDiscord">
+            <input type="text" class="w-50" name="discord" id="lienDiscord" placeholder="Entrez votre lien Discord">
+            <small class="text-danger"><?= $message_lien ?? ''; ?></small>
         </div>
     </div>
 
@@ -98,7 +223,8 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="facebookDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Facebook']" id="lienFacebook">
+            <input type="text" class="w-50" name="lien['Facebook']" id="lienFacebook" placeholder="Entrez votre lien Facebook ">
+            <small class="text-danger"><?= $message_lien ?? ''; ?></small>
         </div>
     </div>
 
@@ -108,7 +234,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="twitterDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Twitter']" id="lienTwitter">
+            <input type="text" class="w-50" name="lien['Twitter']" id="lienTwitter" placeholder="Entrez votre lien Twitter ">
         </div>
     </div>
 
@@ -118,7 +244,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="tiktokDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Tiktok']" id="lienTiktok">
+            <input type="text" class="w-50" name="lien['Tiktok']" id="lienTiktok" placeholder="Entrez votre lien Tiktok">
         </div>
     </div>
 
@@ -128,7 +254,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="youtubeDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Youtube']" id="lienYoutube">
+            <input type="text" class="w-50" name="lien['Youtube']" id="lienYoutube" placeholder="Entrez votre lien youtube">
         </div>
     </div>
 
@@ -138,7 +264,7 @@ require_once '../inc/backheader.inc.php';
         </label>
 
         <div id="instagramDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Instagram']" id="lienInstagram">
+            <input type="text" class="w-50" name="lien['Instagram']" id="lienInstagram" placeholder="Entrez votre lien Instagram">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Valider</button>
@@ -156,9 +282,9 @@ require_once '../inc/backheader.inc.php';
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($teams as $team) : 
-        
-             $medias_links = execute(
+        <?php foreach ($teams as $team) :
+
+            $medias_links = execute(
                 "
                 SELECT m.name_media,m.title_media,m.id_media_type
                 FROM media m
@@ -171,9 +297,9 @@ require_once '../inc/backheader.inc.php';
                     ':id_team' => $team['id_team']
                 )
             )->fetchAll(PDO::FETCH_ASSOC);
-            
 
-             $medias_avatar = execute(
+
+            $medias_avatar = execute(
                 "
                 SELECT m.name_media,m.title_media,m.id_media_type,mt.title_media_type
                 FROM media m
@@ -186,8 +312,8 @@ require_once '../inc/backheader.inc.php';
                     ':id_team' => $team['id_team']
                 )
             )->fetchAll(PDO::FETCH_ASSOC);
-            
-            ?>
+
+        ?>
 
             <tr>
                 <td><?= $team['nickname_team'] ?></td>
@@ -202,18 +328,18 @@ require_once '../inc/backheader.inc.php';
                             </tr>
                         </thead>
                         <tbody>
-                            
-                                <tr>
-                                    <td>
-                                        <table class="table table-dark table-striped  mx-auto">
-                                            <thead>
-                                                <tr>
 
-                                                    <th>Nom</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                            <tr>
+                                <td>
+                                    <table class="table table-dark table-striped  mx-auto">
+                                        <thead>
+                                            <tr>
+
+                                                <th>Nom</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             <?php foreach ($medias_links as $media_link) : ?>
 
                                                 <tr>
@@ -225,27 +351,27 @@ require_once '../inc/backheader.inc.php';
 
                                                     </td>
                                                 </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
 
 
-                                    </td>
-                                    <td>
+                                </td>
+                                <td>
 
-                                        <table class="table table-dark table-striped  mx-auto">
-                                            <thead>
-                                                <tr>
+                                    <table class="table table-dark table-striped  mx-auto">
+                                        <thead>
+                                            <tr>
 
-                                                    <th>Nom</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                                <th>Nom</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             <?php foreach ($medias_avatar as $media_avatar) : ?>
 
                                                 <tr>
-                                                <td><img width="90" src="<?=  '../assets/'.$media_avatar['title_media']; ?>" alt="<?php  ?>"></td>
+                                                    <td><img width="90" src="<?= '../assets/' . $media_avatar['title_media']; ?>" alt="<?php  ?>"></td>
 
                                                     <td>
 
@@ -253,15 +379,15 @@ require_once '../inc/backheader.inc.php';
 
                                                     </td>
                                                 </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
 
-                                    </td>
+                                </td>
 
 
-                                </tr>
-                           
+                            </tr>
+
                         </tbody>
                     </table>
 
@@ -287,16 +413,16 @@ require_once '../inc/backheader.inc.php';
 
 
 <script>
-   let loadFile = function() {
+    let loadFile = function() {
         let image = document.getElementById('image');
 
         image.src = URL.createObjectURL(event.target.files[0]);
     }
 
     window.onload = function() {
-    var myElement = document.getElementById('myElement');
-    myElement.onload = loadFile;
-  };
+        var myElement = document.getElementById('myElement');
+        myElement.onload = loadFile;
+    };
 
     function afficherChampText() {
         var checkboxDiscord = document.getElementsByName("checkboxDiscord")[0];

@@ -101,7 +101,7 @@ require_once '../inc/header.inc.php';
     <input type="radio" name="slider" id="s5">
 
     <?php
-    $imagePaths = execute(
+    $galeries = execute(
       "
       SELECT m.title_media
       FROM media m
@@ -120,11 +120,11 @@ require_once '../inc/header.inc.php';
     //   "../assets/img/gta_decors2 2.png"
     // ];
 
-    for ($i = 0; $i < count($imagePaths); $i++) {
+    for ($i = 0; $i < count($galeries); $i++) {
       $slideNumber = $i + 1;
       $inputId = "s" . $slideNumber;
       $labelId = "slide" . $slideNumber;
-      $imagePath = $imagePaths[$i]['title_media'];
+      $imagePath = $galeries[$i]['title_media'];
     ?>
 
       <label for="<?php echo $inputId; ?>" id="<?php echo $labelId; ?>">

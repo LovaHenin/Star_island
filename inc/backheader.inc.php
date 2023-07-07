@@ -107,10 +107,7 @@
                         <i class="fas fa-fw fa-wrench"></i>
                         <span>Media image,galérie et video</span>
                     </a>
-                    <a class="dropdown-item" href="<?= BASE_PATH . 'back/galerie.php'; ?>">
-                        <i class="fas fa-fw fa-wrench"></i>
-                        <span>Galérie</span>
-                    </a>
+                   
                 </div>
             </li>
 

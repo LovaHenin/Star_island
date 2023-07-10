@@ -1,23 +1,40 @@
 <?php require_once '../config/function.php';
 
 $roles = array(
-    "r1" => "Admins",
-    "r2" => "Staff/Modos",
-    "r3" => "Développeurs",
-    "r4" => "Mappers",
-    "r5" => "Helpers"
+    "Admins" => "Admins",
+    "Staff/Modos" => "Staff/Modos",
+    "Développeurs" => "Développeurs",
+    "Mappers" => "Mappers",
+    "Helpers" => "Helpers"
 
+);
+$inputNames = array(
+    'Discord' => 'discord',
+    'Facebook' => 'Facebook',
+    'Twitter' => 'Twitter',
+    'Tiktok' => 'Tiktok',
+    'Youtube' => 'Youtube',
+    'Instagram' => 'Instagram'
 );
 
 // controle de formulaire si input est vide
 if (!empty($_POST)) {
 
-
+    $noms = $_POST["nom"];
+    $liens = $_POST["lien"];
     $error = false;
+    $nombreLiens = count($noms);
 
+    for ($i = 0; $i < $nombreLiens; $i++) {
+        $nom = $noms[$i];
+        $lien = $liens[$i];
 
-    // input Dates et content pas vide
-
+        if (empty($nom) || empty($lien)) {
+            // Au moins un champ est vide, afficher un message d'erreur
+            $error_input = "Veuillez remplir tous les champs !";
+            $error = true;
+        }
+    }
 
     if (empty($_POST['nickname_team'])) {
 
@@ -29,6 +46,15 @@ if (!empty($_POST)) {
         $message_role = 'il faut choisir un role';
         $error = true;
     }
+
+
+
+
+
+
+
+
+
 
     // pour file
     if (empty($_FILES['title_media']['name'])) {
@@ -53,14 +79,13 @@ if (!empty($_POST)) {
         }
     }
 
-  
 
-//A revoir lien , role
+    //A revoir lien , role
     //debug();
     //die;
     if (!$error) { //insert
 
-        if (empty($_GET['id_teams'])) {
+        if (empty($_GET['id_teams'])) { // si modif 
 
             // pour l'image type file
             $picture_bdd = '../assets/upload/' . uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . $_FILES['title_media']['name'];
@@ -75,7 +100,7 @@ if (!empty($_POST)) {
 
             ), 'ggg');
 
-            // recuperation de id_media_type Avatar
+            // recuperation de id_media_type AvatarTeams
             $id_media_type_avatar =  execute("SELECT id_media_type FROM media_type WHERE title_media_type =:title_media_type", array(
                 ':title_media_type' => 'AvatarsTeams'
             ))->fetch(PDO::FETCH_ASSOC);
@@ -95,13 +120,23 @@ if (!empty($_POST)) {
 
             ), 'ggg');
 
-            $lastIdMediaLink = execute("INSERT INTO media (title_media,name_media,id_media_type) VALUES (:title_media,:name_media,:id_media_type)", array(
-                ':title_media' => $_POST['discord'],
-                ':name_media' => 'avatar',
-                ':id_media_type' => $id_media_type_liens['id_media_type']
+            for ($i = 0; $i < $nombreLiens; $i++) {
+                // $nom = $noms[$i];
+                // $lien = $liens[$i];
+                $lastIdMediaLink = execute("INSERT INTO media (title_media,name_media,id_media_type) VALUES (:title_media,:name_media,:id_media_type)", array(
+                    ':title_media' =>$liens[$i],
+                    ':name_media' => $noms[$i],
+                    ':id_media_type' => $id_media_type_liens['id_media_type']
 
-            ), 'ggg');
+                ), 'ggg');
 
+                 // ajouter id_media et id_team dans team_media
+            execute("INSERT INTO team_media (id_media,id_team) VALUES (:id_media,:id_team)", array(
+                ':id_media' =>  $lastIdMediaLink,
+                ':id_team' => $lastIdTeam,
+
+            ));
+            }
             // ajouter id_media et id_team dans team_media
             execute("INSERT INTO team_media (id_media,id_team) VALUES (:id_media,:id_team)", array(
                 ':id_media' =>  $lastIdMediaAvatar,
@@ -109,15 +144,10 @@ if (!empty($_POST)) {
 
             ));
 
-            // ajouter id_media et id_team dans team_media
-            execute("INSERT INTO team_media (id_media,id_team) VALUES (:id_media,:id_team)", array(
-                ':id_media' =>  $lastIdMediaLink,
-                ':id_team' => $lastIdTeam,
+           
 
-            ));
-
-            $_SESSION['messages']['success'][] = 'Evénement ajouté';
-            header('location:./event.php');
+            $_SESSION['messages']['success'][] = 'Equipe ajouté';
+            header('location:./teams.php');
             exit();
         } else { //sinon=> id existe dans POST modification
 
@@ -157,7 +187,71 @@ $teams = execute("SELECT * FROM team")->fetchAll(PDO::FETCH_ASSOC);
 //debug($teams);
 
 
+//=> pour supprimer
 
+
+
+
+// suppression dans la table team_media si id_team
+if (!empty($_GET) && isset($_GET['id'])) {
+
+    // reccuperation des id_meida dans team_media pour supprimer les medias associé
+$team_medias = execute("SELECT * FROM team_media WHERE id_team=:id",
+array(
+   ':id' => $_GET['id']
+
+))->fetchAll(PDO::FETCH_ASSOC);
+
+     foreach ($teams as $cle => $team) : 
+
+    $supprfait = execute(
+        "DELETE FROM team_media WHERE id_team=:id",
+        array(
+            ':id' => $_GET['id']
+
+        ));
+     endforeach;
+
+   
+
+     foreach ($team_medias as $cle => $team_media) : 
+
+        $supprfait1 = execute(
+            "DELETE FROM media WHERE id_media=:id",
+            array(
+                ':id' => $team_media['id_media']
+    
+            )
+        );
+         endforeach;
+
+         $supprfait2 = execute(
+            "DELETE FROM team WHERE id_team=:id",
+            array(
+                ':id' => $_GET['id']
+    
+            ));
+
+    if ($supprfait) {
+        $_SESSION['messages']['success'][] = 'Team Media suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+
+    if ($supprfait1) {
+        $_SESSION['messages']['success'][] = 'Media suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+
+    if ($supprfait2) {
+        $_SESSION['messages']['success'][] = 'Team suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+    header('location:./teams.php');
+    exit();
+}
 
 
 
@@ -180,7 +274,7 @@ require_once '../inc/backheader.inc.php';
         <label for="selection" class="form-label">Role :</label>
         <small class="text-danger"><?= $message_role ?? ''; ?></small>
         <select id="selection" class="form-control w-25" name="Select_id_media_type" onchange="toggleField()">
-            <option selected>Choisir un role</option>
+            <option selected disabled>Choisir un role</option>
             <small class="text-danger"><?= $message_role ?? ''; ?></small>
             <?php foreach ($roles as $cle => $role) : ?>
 
@@ -205,71 +299,25 @@ require_once '../inc/backheader.inc.php';
         </div>
     </div>
 
-    <h2>Liens</h2>
-    <div class="mb-3">
-        <label>
-            <input type="checkbox" name="checkboxDiscord" onclick="afficherChampText()"> Discord
-        </label>
 
-        <div id="discordDiv" style="display: none;">
-            <input type="text" class="w-50" name="discord" id="lienDiscord" placeholder="Entrez votre lien Discord">
-            <small class="text-danger"><?= $message_lien ?? ''; ?></small>
-        </div>
+    <small class="text-danger"><?= $error_input  ?? ''; ?></small>
+
+    <div id="linksContainer" class="mb-5">
+        <small class="text-danger"><?= $error_input ?? ''; ?></small>
+        <!-- Conteneur pour les liens ajoutés -->
     </div>
 
-    <div class="mb-3">
-        <label>
-            <input type="checkbox" name="checkboxFacebook" onclick="afficherChampText()"> Facebook
-        </label>
 
-        <div id="facebookDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Facebook']" id="lienFacebook" placeholder="Entrez votre lien Facebook ">
-            <small class="text-danger"><?= $message_lien ?? ''; ?></small>
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label>
-            <input type="checkbox" name="checkboxTwitter" onclick="afficherChampText()"> Twitter
-        </label>
-
-        <div id="twitterDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Twitter']" id="lienTwitter" placeholder="Entrez votre lien Twitter ">
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label>
-            <input type="checkbox" name="checkboxTiktok" onclick="afficherChampText()"> Tiktok
-        </label>
-
-        <div id="tiktokDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Tiktok']" id="lienTiktok" placeholder="Entrez votre lien Tiktok">
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label>
-            <input type="checkbox" name="checkboxYoutube" onclick="afficherChampText()"> Youtube
-        </label>
-
-        <div id="youtubeDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Youtube']" id="lienYoutube" placeholder="Entrez votre lien youtube">
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label>
-            <input type="checkbox" name="checkboxInstagram" onclick="afficherChampText()"> Instagram
-        </label>
-
-        <div id="instagramDiv" style="display: none;">
-            <input type="text" class="w-50" name="lien['Instagram']" id="lienInstagram" placeholder="Entrez votre lien Instagram">
-        </div>
-    </div>
     <button type="submit" class="btn btn-primary">Valider</button>
 
 </form>
+
+
+<div class="d-flex justify-content-center"">
+
+
+<button id=" addLinkButton" class="form-group btn btn-primary" onclick="ajouterLien()">Ajouter des lien(s)</button>
+</div>
 
 
 <table class="table table-dark table-striped w-75 mx-auto">
@@ -399,7 +447,7 @@ require_once '../inc/backheader.inc.php';
                 </td>
                 <td>
 
-                    <a href="#" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
+                    <a href="?id=<?= $team['id_team']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
 
                 </td>
             </tr>
@@ -424,61 +472,41 @@ require_once '../inc/backheader.inc.php';
         myElement.onload = loadFile;
     };
 
-    function afficherChampText() {
-        var checkboxDiscord = document.getElementsByName("checkboxDiscord")[0];
-        var discordDiv = document.getElementById("discordDiv");
 
-        var checkboxFacebook = document.getElementsByName("checkboxFacebook")[0];
-        var facebookDiv = document.getElementById("facebookDiv");
+    function ajouterLien() {
+        var linksContainer = document.getElementById("linksContainer");
 
+        // Créer un nouveau div pour le lien
+        var div = document.createElement("div");
+        div.className = "link-input";
 
-        var checkboxTwitter = document.getElementsByName("checkboxTwitter")[0];
-        var twitterDiv = document.getElementById("twitterDiv");
+        // Créer l'input pour le nom
+        var nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.name = "nom[]";
+        nameInput.className = "w-25"
+        nameInput.placeholder = "Entrez le nom du lien";
+        div.appendChild(nameInput);
 
-        var checkboxTiktok = document.getElementsByName("checkboxTiktok")[0];
-        var tiktokDiv = document.getElementById("tiktokDiv");
+        // Créer l'input pour le lien
+        var lienInput = document.createElement("input");
+        lienInput.type = "text";
+        lienInput.name = "lien[]";
+        lienInput.className = "w-50 ml-2"
+        lienInput.placeholder = "Entrez le lien";
+        div.appendChild(lienInput);
 
-        var checkboxYoutube = document.getElementsByName("checkboxYoutube")[0];
-        var youtubeDiv = document.getElementById("youtubeDiv");
+        // Créer le bouton pour supprimer le div
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Supprimer";
+        deleteButton.className = "btn btn-danger  ml-5";
+        deleteButton.onclick = function() {
+            div.remove();
+        };
+        div.appendChild(deleteButton);
 
-        var checkboxInstagram = document.getElementsByName("checkboxInstagram")[0];
-        var instagramDiv = document.getElementById("instagramDiv");
-
-        if (checkboxDiscord.checked) {
-            discordDiv.style.display = "block";
-        } else {
-            discordDiv.style.display = "none";
-        }
-
-        if (checkboxFacebook.checked) {
-            facebookDiv.style.display = "block";
-        } else {
-            facebookDiv.style.display = "none";
-        }
-
-        if (checkboxTwitter.checked) {
-            twitterDiv.style.display = "block";
-        } else {
-            twitterDiv.style.display = "none";
-        }
-
-        if (checkboxTiktok.checked) {
-            tiktokDiv.style.display = "block";
-        } else {
-            tiktokDiv.style.display = "none";
-        }
-
-        if (checkboxInstagram.checked) {
-            instagramDiv.style.display = "block";
-        } else {
-            instagramDiv.style.display = "none";
-        }
-
-        if (checkboxYoutube.checked) {
-            youtubeDiv.style.display = "block";
-        } else {
-            youtubeDiv.style.display = "none";
-        }
+        // Ajouter le div au conteneur des liens
+        linksContainer.appendChild(div);
     }
 </script>
 <?php require_once '../inc/backfooter.inc.php';     ?>

@@ -148,13 +148,136 @@ $events = execute(
 // debug($events);
 // die;
 
+//=> pour supprimer
 
+
+
+
+
+// suppression dans la table event_media et event_content si id_event
+
+if (!empty($_GET) && isset($_GET['id'])) {
+
+    // reccuperation des id_media dans event_media pour supprimer le media associé
+    $event_medias = execute(
+        "SELECT * FROM event_media WHERE id_event=:id",
+        array(
+            ':id' => $_GET['id']
+
+        )
+    )->fetchAll(PDO::FETCH_ASSOC);
+
+    // reccuperation des id_content dans event_content pour supprimer le content associé
+    $content_medias = execute(
+        "SELECT * FROM event_content WHERE id_event=:id",
+        array(
+            ':id' => $_GET['id']
+
+        )
+    )->fetchAll(PDO::FETCH_ASSOC);
+
+    $supprfait = execute(
+        "DELETE FROM event_content WHERE id_event=:id",
+        array(
+            ':id' => $_GET['id']
+
+        )
+    );
+
+    $supprfait1 = execute(
+        "DELETE FROM event_media WHERE id_event=:id",
+        array(
+            ':id' => $_GET['id']
+
+        )
+    );
+
+
+    // suppression dans la table media et content si id_event
+
+    $supprfait2 = execute(
+        "DELETE FROM media WHERE id_media=:id",
+        array(
+            ':id' => $event_medias['id_media']
+
+        )
+    );
+
+    $supprfait3 = execute(
+        "DELETE FROM content WHERE id_content=:id",
+        array(
+            ':id' => $content_medias['id_content']
+
+        )
+    );
+    // suppression dans la table event
+
+    $supprfait4 = execute(
+        "DELETE FROM event WHERE id_event=:id",
+        array(
+            ':id' => $_GET['id']
+
+        )
+    );
+
+    if ($supprfait) {
+        $_SESSION['messages']['success'][] = 'Event_content suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+
+    if ($supprfait1) {
+        $_SESSION['messages']['success'][] = 'Event Media suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+    if ($supprfait2) {
+        $_SESSION['messages']['success'][] = 'Media suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+
+    if ($supprfait3) {
+        $_SESSION['messages']['success'][] = 'content suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+    if ($supprfait4) {
+        $_SESSION['messages']['success'][] = 'event suprimée';
+    } else {
+        $_SESSION['messages']['success'][] = 'Il y a un problème, veuillez réitérer';
+    }
+    header('location:./event.php');
+    exit();
+}
 
 
 require_once '../inc/backheader.inc.php';
 ?>
+<style>
+    .onoff {
+        width: 32px;
+        height: 32px;
+        padding: 1px 2px 3px 3px;
+        font-size: 12px;
+        background: lightgray;
+        text-align: center;
+    }
 
-
+    .onoff div {
+        width: 18px;
+        height: 18px;
+        min-height: 18px;
+        background: lightgray;
+        overflow: hidden;
+        border-top: 1px solid gray;
+        border-right: 1px solid white;
+        border-bottom: 1px solid white;
+        border-left: 1px solid gray;
+        margin: 0 auto;
+        color: gray;
+    }
+</style>
 <div class="container">
     <h1>Ajouter un événement</h1>
     <form method="post" enctype="multipart/form-data">
@@ -218,15 +341,20 @@ require_once '../inc/backheader.inc.php';
 
         <?php foreach ($events as $event) : ?>
             <tr>
-                <td><?= $event['title_content'];?></td>
-                <td><?= $event['start_date_event'];?></td>
-                <td><?= $event['end_date_event'];?></td>
-                <td><?= $event['description_content'];?></td>
-                <td><img width="90" src="<?=  '../assets/'.$event['title_media']; ?>" alt="<?= $event['title_content'];?>"></td>
-                <td><?= $event['activate'];?></td>
+                <td><?= $event['title_content']; ?></td>
+                <td><?= $event['start_date_event']; ?></td>
+                <td><?= $event['end_date_event']; ?></td>
+                <td><?= $event['description_content']; ?></td>
+                <td><img width="90" src="<?= '../assets/' . $event['title_media']; ?>" alt="<?= $event['title_content']; ?>"></td>
+                <td><?= $event['activate']; ?>
+
+                    <button class="onoff" onclick="onoff(this)">
+                        <div>off</div>
+                    </button>
+                </td>
                 <td>
                     <!--?id c'est dans $GET => s il y a plusieur variable en get on utilise &var=nom-->
-                    <a href="?id=<?= $liste_content['id_content']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
+                    <a href="?id=<?= $event['id_event']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
 
                 </td>
             </tr>
@@ -234,6 +362,25 @@ require_once '../inc/backheader.inc.php';
     </tbody>
 </table>
 <script>
+    var buttonstate = 0;
+
+    function onoff(element) {
+        buttonstate = 1 - buttonstate;
+        var blabel, bstyle, bcolor;
+        if (buttonstate) {
+            blabel = "on";
+            bstyle = "green";
+            bcolor = "lightgreen";
+        } else {
+            blabel = "off";
+            bstyle = "lightgray";
+            bcolor = "gray";
+        }
+        var child = element.firstChild;
+        child.style.background = bstyle;
+        child.style.color = bcolor;
+        child.innerHTML = blabel;
+    }
     let loadFile = function() {
         let image = document.getElementById('image');
 

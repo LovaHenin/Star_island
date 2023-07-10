@@ -1,5 +1,52 @@
 <?php require_once '../config/function.php';
 require_once '../inc/header.inc.php';
+
+if (!empty($_POST)) {
+    $error = false;
+    if (empty($_POST['rating_comment'])) {
+        $rating = 0;
+    }
+
+    if (empty($_POST['comment_text'])) {
+        $error = true;
+
+
+        $message_Comment = 'Commentaire obligatoire';
+    }
+
+    if (empty($_POST['nickname_comment'])) {
+        $error = true;
+        $message_nickname = 'ce champ est obligatoire';
+    }
+
+    if (!$error) {
+
+        // liste des avatars
+        $medias_images_avatar = execute("SELECT * FROM media m INNER JOIN media_type mt ON m.id_media_type=mt.id_media_type where mt.title_media_type = :avatars", array(
+            ':avatars' => 'Avatars'
+        ))->fetchAll(PDO::FETCH_ASSOC);
+        $randomizeAvatar = rand(0, count($medias_images_avatar) - 1);
+       // debug($medias_images_avatar[$randomizeAvatar]['id_media']);
+
+        // Ajouter un contenu
+        $success = execute("INSERT INTO comment (rating_comment , comment_text, publish_date_comment, nickname_comment,id_media ) VALUES (:rating_comment , :comment_text, :publish_date_comment, :nickname_comment,:id_media)", array(
+            ':rating_comment' => $_POST['rating_comment'],
+            ':comment_text' => $_POST['comment_text'],
+            ':publish_date_comment' => date("Y-m-d H:i:s"),
+            ':nickname_comment' => $_POST['nickname_comment'],
+            ':id_media' =>  $medias_images_avatar[$randomizeAvatar]['id_media'],
+        ));
+
+        if ($success) {
+            $_SESSION['messages']['success'][] = 'Nouveau contenu ajouté.';
+        } else {
+            $_SESSION['messages']['danger'][] = 'Problème de traitement';
+        }
+
+        header('location:./index.php');
+        exit();
+    }
+}
 ?>
 
 <style>
@@ -405,85 +452,130 @@ require_once '../inc/header.inc.php';
                 </div>
 
             </div>
-            <div class="row mb-5">
+            <!-- <div class="row mb-5">
                 <div class="col-12 d-flex justify-content-center mt-5">
                     <div class="comment d-row  flex flex-column justify-content-center text-light  border border-light w-75">
 
+                        <form class="d-flex flex-column ">
                         <div class="star">
                             <p>VOTRE AVIS NOUS INTERESSE</p>
                             <p>
                         </div>
 
-                        <div class="etoile_avis etoile d-flex justify-content-center my-2  mt-2">
-                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                            <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                            <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
-                        </div>
-                        <form class="d-flex flex-column ">
+                        <div class="d-flex justify-content-around mb-3 px-5">
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                    </div>
+
+
                             <textarea class="message w-50 mx-auto" id="message" name="message" value="Votre commentaire" rows="4" cols="50"></textarea>
                             <input class="w-20 my-2 mx-auto" type="submit" value="Publier">
                         </form>
+
                     </div>
 
                 </div>
+            </div> -->
+
+            <div class="row mb-5 w-75 my-2 mx-auto">
+                <form class="d-flex flex-column border bg-white bg-opacity-25 px-5 my-5 rounded" method="post" enctype="multipart/form-data">
+                    <h4 class="text-center py-3">Votre avis nous intéresse</h4>
+
+                    <div class="d-flex justify-content-around mb-3 px-5">
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                        <i class="fas fa-star fa-3x star-avis"></i>
+                    </div>
+                    <input type="text" name="nickname_comment" class="form-control w-25 my-2 mx-auto" id="nickname_comment" placeholder="Pseudo">
+                    <small class="bg-white bg-opacity-75 text-danger p-2 mb-3"><?= $message_nickname ?? ""; ?></small>
+                    <textarea name="comment_text" id="comment_text" cols="10" rows="5" class="bg-white bg-opacity-25" placeholder="Commentaires"></textarea>
+                    <small class="bg-white bg-opacity-75 text-danger p-2 mb-3"><?= $message_Comment  ?? ""; ?></small>
+                    <input type="hidden" name="rating_comment" id="rating_comment">
+                    <button type="submit" class="btn btn-light w-25 mb-3  my-2 mx-auto">Publier</button>
+                </form>
             </div>
         </div>
-    </section>
+</div>
+</section>
 
 </div>
 
 
 <script>
-    /* variables index rond*/
-    const section1 = document.getElementById("section1");
-    const button1 = document.getElementById("rond1");
-    const section2 = document.getElementById("section2");
-    const button2 = document.getElementById("rond2");
-    const section3 = document.getElementById("section3");
-    const button3 = document.getElementById("rond3");
+    document.addEventListener("DOMContentLoaded", () => {
+        /* variables index rond*/
+        const section1 = document.getElementById("section1");
+        const button1 = document.getElementById("rond1");
+        const section2 = document.getElementById("section2");
+        const button2 = document.getElementById("rond2");
+        const section3 = document.getElementById("section3");
+        const button3 = document.getElementById("rond3");
 
 
-    button1.addEventListener("click", function() {
+        button1.addEventListener("click", function() {
 
 
-        section1.style.opacity = "1";
+            section1.style.opacity = "1";
 
-        button1.style.color = "white";
-        section3.style.opacity = "0";
-        section2.style.opacity = "0";
-        button2.style.color = "red";
-        button3.style.color = "red";
-
-
-    });
+            button1.style.color = "white";
+            section3.style.opacity = "0";
+            section2.style.opacity = "0";
+            button2.style.color = "red";
+            button3.style.color = "red";
 
 
-    button2.addEventListener("click", function() {
+        });
+
+
+        button2.addEventListener("click", function() {
 
 
 
-        section2.style.opacity = "1";
+            section2.style.opacity = "1";
 
-        button2.style.color = "white";
-        section1.style.opacity = "0";
-        section3.style.opacity = "0";
+            button2.style.color = "white";
+            section1.style.opacity = "0";
+            section3.style.opacity = "0";
 
-        button1.style.color = "red";
-        button3.style.color = "red";
+            button1.style.color = "red";
+            button3.style.color = "red";
 
-    });
-    button3.addEventListener("click", function() {
+        });
+        button3.addEventListener("click", function() {
 
-        section3.style.opacity = "1";
+            section3.style.opacity = "1";
 
-        button3.style.color = "white";
-        section1.style.opacity = "0";
-        section2.style.opacity = "0";
-        button1.style.color = "red";
-        button2.style.color = "red";
+            button3.style.color = "white";
+            section1.style.opacity = "0";
+            section2.style.opacity = "0";
+            button1.style.color = "red";
+            button2.style.color = "red";
 
+        });
+
+        // Gestion des étoiles dans "votre avis nous interesse"
+        const stars = document.querySelectorAll(".fas.fa-star.star-avis");
+        for (let index = 0; index < stars.length; index++) {
+            stars[index].classList.add('text-dark');
+
+            stars[index].addEventListener('click', () => {
+                for (let i = 0; i < stars.length; i++) {
+                    if (i <= index) {
+                        stars[i].classList.remove('text-dark');
+                        stars[i].classList.add('text-warning');
+                        document.getElementById('rating_comment').value = i + 1;
+                    } else {
+                        stars[i].classList.remove('text-warning');
+                        stars[i].classList.add('text-dark');
+                    }
+                }
+            });
+        }
     });
 </script>
 

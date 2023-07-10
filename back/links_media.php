@@ -74,7 +74,7 @@ require_once '../inc/backheader.inc.php';
     <thead>
         <tr>
             <th>Titre Media</th>
-            <th>Nom Media (ALT)</th>
+            <th>Nom Media</th>
             <th>Type de Media</th>
             <th class="text-center">Actions</th>
         </tr>

@@ -14,11 +14,13 @@ SELECT m.title_media,m.name_media,mt.title_media_type,mt.id_media_type,m.id_medi
 FROM media m
 INNER JOIN media_type mt
 ON m.id_media_type= mt.id_media_type
-WHERE mt.title_media_type!=:links AND mt.title_media_type='galerie' ",
+WHERE mt.title_media_type!=:links AND mt.title_media_type=:title_media_type",
     array(
-        ':links' => $links
+        ':title_media_type'=>'galerie',
+        ':links' => 'liens'
     )
 )->fetchAll(PDO::FETCH_ASSOC);
+
 
 //debug($medias_images_videos);
 $medias_images_avatar = execute(
@@ -27,8 +29,9 @@ SELECT m.title_media,m.name_media,mt.title_media_type,mt.id_media_type,m.id_medi
 FROM media m
 INNER JOIN media_type mt
 ON m.id_media_type= mt.id_media_type
-WHERE mt.title_media_type!=:links AND mt.title_media_type='Avatars' ",
+WHERE mt.title_media_type!=:links AND mt.title_media_type=:title_media_type",
     array(
+        ':title_media_type'=>'Avatars',
         ':links' => $links
     )
 )->fetchAll(PDO::FETCH_ASSOC);
@@ -39,12 +42,13 @@ SELECT m.title_media,m.name_media,mt.title_media_type,mt.id_media_type,m.id_medi
 FROM media m
 INNER JOIN media_type mt
 ON m.id_media_type= mt.id_media_type
-WHERE mt.title_media_type!=:links AND mt.title_media_type='AvatarsTeams' ",
+WHERE mt.title_media_type!=:links AND mt.title_media_type=:title_media_type",
     array(
+        ':title_media_type'=>'AvatarsTeams',
         ':links' => $links
     )
 )->fetchAll(PDO::FETCH_ASSOC);
-
+//debug($medias_images_avatarTeams);
 
 $medias_images_event = execute(
     "
@@ -52,11 +56,27 @@ SELECT m.title_media,m.name_media,mt.title_media_type,mt.id_media_type,m.id_medi
 FROM media m
 INNER JOIN media_type mt
 ON m.id_media_type= mt.id_media_type
-WHERE mt.title_media_type!=:links AND mt.title_media_type='event' ",
+WHERE mt.title_media_type!=:links AND mt.title_media_type=:title_media_type",
     array(
+        ':title_media_type'=>'event',
         ':links' => $links
     )
 )->fetchAll(PDO::FETCH_ASSOC);
+
+// pour les commentaires
+$medias_images_comment = execute(
+    "
+SELECT m.title_media,m.name_media,mt.title_media_type,mt.id_media_type,m.id_media
+FROM media m
+INNER JOIN media_type mt
+ON m.id_media_type= mt.id_media_type
+WHERE mt.title_media_type!=:links AND mt.title_media_type=:title_media_type",
+    array(
+        ':title_media_type'=>'comment',
+        ':links' => $links
+    )
+)->fetchAll(PDO::FETCH_ASSOC);
+
 
 //=> pour supprimer
 
@@ -106,7 +126,7 @@ require_once '../inc/backheader.inc.php';
 <?php endforeach; ?>
 </div>
 
-<h2>Avatars</h2>
+<h2>Avatars Teams</h2>
 <div class=" d-flex ">
     
 <?php foreach ($medias_images_avatarTeams as $media_avatarTeam) : ?>
@@ -124,7 +144,7 @@ require_once '../inc/backheader.inc.php';
 </div>
 
 
-<h2>Avatars Teams</h2>
+<h2>Avatars</h2>
 <div class=" d-flex ">
     
 <?php foreach ($medias_images_avatar as $media_avatar) : ?>
@@ -153,6 +173,22 @@ require_once '../inc/backheader.inc.php';
         <div class="card-body">
             <h5 class="card-title"><?= $media_event['name_media']   ?></h5>
             <a href="?id=<?= $media_event['id_media']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-primary"> Supprimer</a>
+        </div>
+
+    </div>
+<?php endforeach; ?>
+
+<h2>Avatar Commentaires</h2>
+<div class=" d-flex ">
+    
+<?php foreach ($medias_images_comment as $media_comment) : ?>
+ 
+    <div class="card mr-3" style="width: 10rem;">
+
+        <img src="<?= '../assets/' . $media_comment['title_media']; ?>" class="card-img-top" alt="<?= $media_comment['name_media']   ?>">
+        <div class="card-body">
+            <h5 class="card-title"><?= $media_comment['name_media']   ?></h5>
+            <a href="?id=<?= $media_comment['id_media']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-primary"> Supprimer</a>
         </div>
 
     </div>

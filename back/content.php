@@ -117,7 +117,18 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
 
 require_once '../inc/backheader.inc.php';
 ?>
-
+ <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table td, table th {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
 <form action="" method="post" class="w-50 mx-auto mt-5 mb-5">
 
     <legend>Gestion Content</legend>

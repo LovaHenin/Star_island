@@ -14,7 +14,7 @@ const CONFIG=[
     ],
     'app'=>[
         'name'=>'STAR_ISLAND',
-        'projecturl'=>'http://localhost/star_island'
+        'projecturl'=>'http://localhost/star_island/'
     ]
 
 ];

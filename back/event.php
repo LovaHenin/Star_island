@@ -127,9 +127,6 @@ if (!empty($_POST)) {
     }
 }
 
-
-
-
 $events = execute(
     "
     SELECT *
@@ -348,9 +345,7 @@ require_once '../inc/backheader.inc.php';
                 <td><img width="90" src="<?= '../assets/' . $event['title_media']; ?>" alt="<?= $event['title_content']; ?>"></td>
                 <td><?= $event['activate']; ?>
 
-                    <button class="onoff" onclick="onoff(this)">
-                        <div>off</div>
-                    </button>
+                <a href="?id=<?= $event['id_event']; ?>" class="btn btn-outline-info">Activer</a>
                 </td>
                 <td>
                     <!--?id c'est dans $GET => s il y a plusieur variable en get on utilise &var=nom-->
@@ -362,25 +357,7 @@ require_once '../inc/backheader.inc.php';
     </tbody>
 </table>
 <script>
-    var buttonstate = 0;
-
-    function onoff(element) {
-        buttonstate = 1 - buttonstate;
-        var blabel, bstyle, bcolor;
-        if (buttonstate) {
-            blabel = "on";
-            bstyle = "green";
-            bcolor = "lightgreen";
-        } else {
-            blabel = "off";
-            bstyle = "lightgray";
-            bcolor = "gray";
-        }
-        var child = element.firstChild;
-        child.style.background = bstyle;
-        child.style.color = bcolor;
-        child.innerHTML = blabel;
-    }
+   
     let loadFile = function() {
         let image = document.getElementById('image');
 

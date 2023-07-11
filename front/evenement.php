@@ -1,5 +1,28 @@
 <?php require_once '../config/function.php';
 require_once '../inc/header.inc.php';
+
+$event = execute(
+    "
+    SELECT *
+    FROM event e
+    INNER JOIN event_media em
+    ON e.id_event=em.id_event
+    INNER JOIN media m
+    ON em.id_media=m.id_media
+    INNER JOIN event_content ec
+    ON e.id_event = ec.id_event
+    INNER JOIN content c
+    ON ec.id_content=c.id_content
+    WHERE e.id_event=:id_event",
+
+    array(
+        ':id_event' => '10'//$_GET['id']
+    )
+  
+  )->fetch(PDO::FETCH_ASSOC);
+
+  
+
 ?>
 <style>
     .reseauSociaux {
@@ -68,25 +91,30 @@ require_once '../inc/header.inc.php';
             width: 30%;
 
         }
-
+        #countdown {
+      font-size: 24px;
+      font-weight: bold;
+    }
     }
 </style>
 
 <div class="titreCentre container">
     <div class="row text-center justify-content-between">
         <div class="col-12 col-md-6">
-            <img id="prison" src="../assets/img/prisonds 1.png" alt="prison" class="img-fluid">
+        <img width="400" src="<?= '../assets/' . $event['title_media']; ?>" alt="<?= $event['title_content']; ?>">
         </div>
         <div class="col-12 col-md-6  text-light mb-2">
             <h2 class="text-light">TIME REMAINING</h2>
+            <div id="countdown"></div>
             <div class="timer d-flex justify-content-center mb-3">
                 <label class="text-white" id="jour"></label>
                 <label class="text-white" id="heure"></label>
                 <label class="text-white" id="min"></label>
                 <label class="text-white" id="sec"></label>
             </div>
-            <h1 class="text-white mb-2">Titre</h1>
-            <p> eius sed architecto neque magni est quam repellat consequatur voluptates. Pariatur eaque perferendis porro vel eum atque.</p>
+            <h1 class="text-white mb-2"><?= $event['title_content']; ?></h1>
+            <h3> Du :<?= date("Y-m-d", strtotime($event['start_date_event']) ); ?> Au :<?= date("Y-m-d", strtotime($event['end_date_event']) ); ?>  </h3>
+            <p><?= $event['description_content']; ?></p>
         </div>
     </div>
 </div>
@@ -149,33 +177,34 @@ require_once '../inc/header.inc.php';
 
 
 <script>
-    /*variables compte à rebour*/
-    var jour = document.getElementById("jour");
-    var heure = document.getElementById("heure");
-    var min = document.getElementById("min");
-    var seconde = document.getElementById("sec");
+ // Date de départ (au format "année-mois-jour heure:minute:seconde")
+ var dateDepart = new Date("2023-07-31T23:59:59");
 
-    function Rebour() {
-        var date1 = new Date();
-        var date2 = new Date("Jun 31, 2023 00:00:00");
-        var sec = (date2 - date1) / 1000;
-        var n = 24 * 3600;
-        if (sec > 0) {
-            j = Math.floor(sec / n);
-            h = Math.floor((sec - (j * n)) / 3600);
-            mn = Math.floor((sec - ((j * n + h * 3600))) / 60);
+// Fonction pour mettre à jour le compte à rebours
+function mettreAJourCompteARebours() {
+  // Date et heure actuelles
+  var maintenant = new Date();
 
-            sec = Math.floor(sec - ((j * n + h * 3600 + mn * 60)));
+  // Calcul du temps restant en millisecondes
+  var tempsRestant = dateDepart - maintenant;
 
-            jour.innerHTML = "" + j + " : ";
-            heure.innerHTML = "" + h + "  :";
-            min.innerHTML = "" + mn + " : ";
-            seconde.innerHTML = "" + sec + " ";
+  // Vérifier si le compte à rebours est terminé
+  if (tempsRestant <= 0) {
+    document.getElementById("countdown").innerHTML = "Compte à rebours terminé !";
+  } else {
+    // Calculer les jours, heures, minutes et secondes restantes
+    var jours = Math.floor(tempsRestant / (1000 * 60 * 60 * 24));
+    var heures = Math.floor((tempsRestant % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((tempsRestant % (1000 * 60 * 60)) / (1000 * 60));
+    var secondes = Math.floor((tempsRestant % (1000 * 60)) / 1000);
 
-            window.status = "Temps restant : " + j + " j " + h + " h " + mn + " min " + sec + " s ";
-        }
-        tRebour = setTimeout("Rebour();", 1000);
-    }
+    // Afficher le compte à rebours dans l'élément div avec l'id "countdown"
+    document.getElementById("countdown").innerHTML = jours + "j :" + heures + "h :" + minutes + "m :" + secondes + "s";
+  }
+}
+
+// Mettre à jour le compte à rebours toutes les secondes
+setInterval(mettreAJourCompteARebours, 1000);
 
 
     Rebour();

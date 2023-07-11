@@ -178,24 +178,8 @@ require_once '../inc/backheader.inc.php';
     </div>
 <?php endforeach; ?>
 
-<h2>Avatar Commentaires</h2>
-<div class=" d-flex ">
-    
-<?php foreach ($medias_images_comment as $media_comment) : ?>
- 
-    <div class="card mr-3" style="width: 10rem;">
 
-        <img src="<?= '../assets/' . $media_comment['title_media']; ?>" class="card-img-top" alt="<?= $media_comment['name_media']   ?>">
-        <div class="card-body">
-            <h5 class="card-title"><?= $media_comment['name_media']   ?></h5>
-            <a href="?id=<?= $media_comment['id_media']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-primary"> Supprimer</a>
-        </div>
-
-    </div>
-<?php endforeach; ?>
 </div>
-
-
 
 
 

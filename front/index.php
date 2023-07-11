@@ -26,7 +26,7 @@ if (!empty($_POST)) {
             ':avatars' => 'Avatars'
         ))->fetchAll(PDO::FETCH_ASSOC);
         $randomizeAvatar = rand(0, count($medias_images_avatar) - 1);
-       // debug($medias_images_avatar[$randomizeAvatar]['id_media']);
+        // debug($medias_images_avatar[$randomizeAvatar]['id_media']);
 
         // Ajouter un contenu
         $success = execute("INSERT INTO comment (rating_comment , comment_text, publish_date_comment, nickname_comment,id_media ) VALUES (:rating_comment , :comment_text, :publish_date_comment, :nickname_comment,:id_media)", array(
@@ -47,6 +47,65 @@ if (!empty($_POST)) {
         exit();
     }
 }
+// recuperer toutes les contents 
+$listes_content = execute("
+SELECT c.title_content, p.title_page,c.description_content,c.id_content
+FROM content c
+INNER JOIN page p
+ON c.id_page= p.id_page
+")->fetchAll(PDO::FETCH_ASSOC);
+
+//debug($listes_content);
+
+// recuperer titre_home pour index home
+$titre_home = execute(
+    "
+    SELECT description_content
+    FROM content
+   WHERE title_content=:title_content",
+    array(
+        ':title_content' => 'titre_home'
+    )
+
+)->fetch(PDO::FETCH_ASSOC);
+
+// recuperer contenu_home 1 index section1
+$contenu_home1 = execute(
+    "
+    SELECT description_content
+    FROM content
+   WHERE title_content=:title_content",
+    array(
+        ':title_content' => 'contenu_home1'
+    )
+
+)->fetch(PDO::FETCH_ASSOC);
+
+// recuperer les images du galerie
+$galeries = execute(
+    " SELECT m.title_media,m.name_media
+    FROM media m
+    INNER JOIN media_type mt
+    ON m.id_media_type=mt.id_media_type
+    WHERE mt.title_media_type=:title_media_type",
+    array(
+        ':title_media_type' => 'galerie'
+    )
+
+)->fetchAll(PDO::FETCH_ASSOC);
+
+$comments = execute(
+    "
+    SELECT m.title_media,m.name_media,c.rating_comment,c.comment_text,c.publish_date_comment,c.id_comment,c.nickname_comment,c.activate
+    FROM media m
+    INNER JOIN comment c
+    ON m.id_media=c.id_media
+   "
+
+)->fetchAll(PDO::FETCH_ASSOC);
+
+//debug($comments);
+
 ?>
 
 <style>
@@ -141,6 +200,10 @@ if (!empty($_POST)) {
 
         }
 
+        .contenu {
+            font-size: 1.3rem;
+        }
+
         .img-home {
             width: 130%;
             margin-top: 0.5vh;
@@ -177,15 +240,11 @@ if (!empty($_POST)) {
                     <div class="col-12">
 
                         <div class=" d-flex flex-column justify-content-evenly text-light ">
-                            <h1 class="text-white text-center Iceland py-3">BIENVENUE SUR <br>
-                                STAR'ISLAND</h1>
-                            <p class=>
+                            <h1 class="text-white text-center Iceland py-3"><?= $titre_home['description_content']; ?></h1>
+                            <p class="contenu">
                                 <!--appliquer sur l'autre botton la police predefini dans css btn-lg bouton large-->
                                 <!--btn-lg me-5 ajouter un marigin end -->
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto hic aliquam at quidem natus?
-                                Deleniti earum quam explicabo, alias, modi error expedita alias, modi error expedita
-                                vel eius quam explicabo, alias, modi error expedita quidem adipisci reiciendis, atque quae nulla.
-                                quam explicabo, alias, modi error expeditaquam explicabo, alias, modi error expedita
+                                <?= $contenu_home1['description_content']; ?>
 
 
                             </p>
@@ -202,7 +261,7 @@ if (!empty($_POST)) {
                 <div class=" col-12">
                     <div class="text-center">
                         <div class="card-body">
-                            <h1 class="card-title  text-white">BIENVENUE SUR <br>STAR ISLAND</h1>
+                            <h1 class="card-title  text-white"><?= $titre_home['description_content']; ?></h1>
                             <!--mettre les col texte et image à 6et 6-->
                             <!--ajouter une autre classe si necessaire-->
 
@@ -211,28 +270,20 @@ if (!empty($_POST)) {
 
                             <div id="carouselExampleCaptions" class="carousel slide  mx-auto">
                                 <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    <?php foreach ($galeries as $key => $galerie) { 
+                                        ?>
+                                        
+                                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= $key; ?>" <?php if($key == 0){echo "class='active'";} ?>></button>
+                                    <?php } ?>
                                 </div>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="../assets/img/gta_decors1.jpg" class="d-block w-100" alt="...">
-
+                                    <?php foreach ($galeries as $key => $galerie) {?>
+                                        <div class="carousel-item <?php if($key == 0){echo 'active';} ?>">
+                                        <img class="d-block w-100"  src="<?= '../assets/' . $galerie['title_media']; ?>" alt="<?= $galerie['name_media']  ?>">
                                     </div>
-                                    <div class="carousel-item">
-                                        <img src="../assets/img/teaser.jpg" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="../assets/img/teaser.jpg" class="d-block w-100" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php  } ?>
+                                 </div>   
+                                
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
@@ -261,8 +312,7 @@ if (!empty($_POST)) {
                         <!-- mettre chaque premiere lette en majuscule et la police à Iceland-->
 
                         <div class=" titre d-flex flex-column justify-content-evenly text-light ">
-                            <h1 class="titre_sec3 text-center Iceland ">BIENVENUE SUR <br>
-                                STAR'ISLAND</h1>
+                            <h1 class="titre_sec3 text-center Iceland "><?= $titre_home['description_content']; ?></h1>
                         </div>
                         <!--border border-light w-75 mettre une bordure et reduire la taille à 75%-->
                         <div class="comment d-flex flex-column justify-content-evenly text-light  border border-light w-75">
@@ -299,6 +349,7 @@ if (!empty($_POST)) {
             </div>
 
         </section>
+
         <div class="bas d-flex flex-column justify-content-center">
             <div class="navigation d-flex  justify-content-center">
                 <button id="rond1" class="btn btn-circle">O</button>
@@ -363,145 +414,63 @@ if (!empty($_POST)) {
 
     <!-- Section Avis-->
     <section class="row avis d-flex flex-column align-items-center">
+
         <div class="container">
+
             <div class="row mb-5">
-                <div class="col-12 col-md-6 d-flex justify-content-center ">
-                    <div class="rep1 bloc d-flex  border border-light">
-                        <div class="p-2">
-                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class="img-fluid">
-                        </div>
+                <?php foreach ($comments as $comment) : ?>
+                    <div class="col-12 col-md-6 d-flex justify-content-center ">
 
-                        <div class="ps-2">
-                            <div class="etoile_avis d-flex justify-content-around  mt-2">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
+                        <div class=" w-100 rep1 bloc d-flex  border border-light">
+                            <div class="p-2">
+                                <img width="90" src="<?= '../assets/' . $comment['title_media']; ?>" alt="<?= $comment['name_media']  ?>" class="img-fluid">
                             </div>
-                            <div class="mt-2 text-black">
-                                Super serveur GTA RP <br>
-                                Publié le 20/06/2023
+
+                            <div class="ps-2">
+                                <div class="star-rating " colspan="2">
+                                    <?php
+                                    for ($i = 0; $i < 5; $i++) {
+                                        if ($i < $comment['rating_comment']) {
+                                            echo "<i class='fas fa-star  text-warning'></i>";
+                                        } else {
+                                            echo "<i class='fas fa-star text-secondary'></i>";
+                                        }
+                                    }
+
+                                    ?>
+
+                                </div>
+                                <div class="mt-2 text-white">
+                                    <?= $comment['comment_text']; ?><br>
+                                    Publié le : <?= $comment['publish_date_comment']; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 d-flex justify-content-center">
-                    <div id="rep2" class="rep d-flex border border-light mt">
-                        <div class="p-2">
-                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
-                        </div>
-                        <div class="ps-2">
-                            <div class="etoile_avis d-flex justify-content-around  mt-2">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
-                            </div>
-                            <div class="mt-2 text-black">
-                                Super serveur GTA RP <br>
-                                Publié le 20/06/2023
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-            <div class="row mb-5">
-                <div class="col-12 col-md-6 d-flex justify-content-center ">
-                    <div id="rep3" class="rep1 bloc d-flex  border border-light">
-                        <div class="p-2">
-                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class="img-fluid">
-                        </div>
-
-                        <div class="ps-2">
-                            <div class="etoile_avis d-flex justify-content-around  mt-2">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
-                            </div>
-                            <div class="mt-2 text-black">
-                                Super serveur GTA RP <br>
-                                Publié le 20/06/2023
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 d-flex justify-content-center">
-                    <div id="rep4" class="rep d-flex border border-light">
-                        <div class="p-2">
-                            <img src="<?= BASE_PATH . 'assets/img/Ellipse56.png' ?>" alt="" class=" img-fluid">
-                        </div>
-                        <div class="ps-2">
-                            <div class="etoile_avis d-flex justify-content-around  mt-2">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoileJaune.png' ?>" alt="">
-                                <img src="<?= BASE_PATH . 'assets/img/etoilenoire.png' ?>" alt="">
-                            </div>
-                            <div class="mt-2 text-black">
-                                Super serveur GTA RP <br>
-                                Publié le 20/06/2023
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- <div class="row mb-5">
-                <div class="col-12 d-flex justify-content-center mt-5">
-                    <div class="comment d-row  flex flex-column justify-content-center text-light  border border-light w-75">
-
-                        <form class="d-flex flex-column ">
-                        <div class="star">
-                            <p>VOTRE AVIS NOUS INTERESSE</p>
-                            <p>
-                        </div>
+                <?php endforeach; ?>
+                <div class="row mb-5 w-75 my-2 mx-auto">
+                    <form class="d-flex flex-column border bg-white bg-opacity-25 px-5 my-5 rounded" method="post" enctype="multipart/form-data">
+                        <h4 class="text-center py-3 text-white">Votre avis nous intéresse</h4>
 
                         <div class="d-flex justify-content-around mb-3 px-5">
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                    </div>
-
-
-                            <textarea class="message w-50 mx-auto" id="message" name="message" value="Votre commentaire" rows="4" cols="50"></textarea>
-                            <input class="w-20 my-2 mx-auto" type="submit" value="Publier">
-                        </form>
-
-                    </div>
-
+                            <i class="fas fa-star fa-2x star-avis"></i>
+                            <i class="fas fa-star fa-2x star-avis"></i>
+                            <i class="fas fa-star fa-2x star-avis"></i>
+                            <i class="fas fa-star fa-2x star-avis"></i>
+                            <i class="fas fa-star fa-2x star-avis"></i>
+                        </div>
+                        <input type="text" name="nickname_comment" class="form-control w-25 my-2 mx-auto" id="nickname_comment" placeholder="Pseudo">
+                        <small class="bg-white bg-opacity-75 text-danger p-2 mb-3"><?= $message_nickname ?? ""; ?></small>
+                        <textarea name="comment_text" id="comment_text" cols="10" rows="5" class="bg-white bg-opacity-25" placeholder="Commentaires"></textarea>
+                        <small class="bg-white bg-opacity-75 text-danger p-2 mb-3"><?= $message_Comment  ?? ""; ?></small>
+                        <input type="hidden" name="rating_comment" id="rating_comment">
+                        <button type="submit" class="btn btn-light w-25 mb-3  my-2 mx-auto">Publier</button>
+                    </form>
                 </div>
-            </div> -->
-
-            <div class="row mb-5 w-75 my-2 mx-auto">
-                <form class="d-flex flex-column border bg-white bg-opacity-25 px-5 my-5 rounded" method="post" enctype="multipart/form-data">
-                    <h4 class="text-center py-3">Votre avis nous intéresse</h4>
-
-                    <div class="d-flex justify-content-around mb-3 px-5">
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                        <i class="fas fa-star fa-3x star-avis"></i>
-                    </div>
-                    <input type="text" name="nickname_comment" class="form-control w-25 my-2 mx-auto" id="nickname_comment" placeholder="Pseudo">
-                    <small class="bg-white bg-opacity-75 text-danger p-2 mb-3"><?= $message_nickname ?? ""; ?></small>
-                    <textarea name="comment_text" id="comment_text" cols="10" rows="5" class="bg-white bg-opacity-25" placeholder="Commentaires"></textarea>
-                    <small class="bg-white bg-opacity-75 text-danger p-2 mb-3"><?= $message_Comment  ?? ""; ?></small>
-                    <input type="hidden" name="rating_comment" id="rating_comment">
-                    <button type="submit" class="btn btn-light w-25 mb-3  my-2 mx-auto">Publier</button>
-                </form>
             </div>
         </div>
-</div>
-</section>
+    </section>
 
 </div>
 

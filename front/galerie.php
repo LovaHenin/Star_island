@@ -101,15 +101,18 @@ require_once '../inc/header.inc.php';
     <input type="radio" name="slider" id="s5">
 
     <?php
-    $galeries = execute(
-      "
-      SELECT m.title_media
-      FROM media m
-      INNER JOIN media_type mt
-      ON m.id_media_type=mt.id_media_type
-      WHERE (mt.title_media_type='galerie')"
-      
-  )->fetchAll(PDO::FETCH_ASSOC);
+    // recuperer les images du galerie
+   $galeries = execute(
+    " SELECT m.title_media
+    FROM media m
+    INNER JOIN media_type mt
+    ON m.id_media_type=mt.id_media_type
+    WHERE mt.title_media_type=:title_media_type",
+    array(
+      ':title_media_type' => 'galerie'
+  )
+    
+)->fetchAll(PDO::FETCH_ASSOC);
 
 
     //[

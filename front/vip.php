@@ -1,5 +1,32 @@
 <?php require_once '../config/function.php';
 require_once '../inc/header.inc.php';
+
+
+
+
+// recuperer contenu_vip dans content 
+$contenu_vip = execute(
+  "
+  SELECT description_content
+  FROM content
+ WHERE title_content=:title_content",
+  array(
+      ':title_content' => 'vip'
+  )
+
+)->fetch(PDO::FETCH_ASSOC);
+
+// recuperer contenu_vip+ dans content 
+$contenu_vip_plus = execute(
+  "
+  SELECT description_content
+  FROM content
+ WHERE title_content=:title_content",
+  array(
+      ':title_content' => 'vip+'
+  )
+
+)->fetch(PDO::FETCH_ASSOC);
 ?>
 <style>
   .reseauSociaux {
@@ -99,9 +126,9 @@ require_once '../inc/header.inc.php';
 
     <div class="col-12 col-md-4 text-light">
       <h2>VIP</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, modi itaque odit sint explicabo animi asperiores, eaque recusandae, suscipit ipsum dicta nulla pariatur quasi odio numquam impedit incidunt ad? Nostrum!</p>
+      <p> <?= $contenu_vip['description_content']; ?></p>
       <h2>VIP+</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid iure non ea neque et exercitationem veritatis commodi accusamus sit id accusantium nam eveniet, laudantium numquam reprehenderit necessitatibus. Hic, eligendi perferendis!</p>
+      <p> <?= $contenu_vip_plus['description_content']; ?></p>
     </div>
 
     <div class="col-12 col-md-4">

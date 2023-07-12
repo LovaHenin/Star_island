@@ -20,3 +20,4 @@ const CONFIG=[
 ];
 
 const BASE_PATH='/star_island/';
+

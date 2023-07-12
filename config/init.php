@@ -14,10 +14,11 @@ const CONFIG=[
     ],
     'app'=>[
         'name'=>'STAR_ISLAND',
-        'projecturl'=>'https://lova.cezdigit.com/Star_island'
+        'projecturl'=>'https://lova.cezdigit.com'
     ]
 
 ];
 
-const BASE_PATH='/Star_island';
+const BASE_PATH='/
+';
 
